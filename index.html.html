@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SIMADIK — Universitas Pamulang</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy:     #0D1B3E;
+  --navy2:    #102046;
+  --navy3:    #162B5A;
+  --blue:     #1A56DB;
+  --blue2:    #3B82F6;
+  --blue3:    #60A5FA;
+  --gold:     #F59E0B;
+  --gold2:    #FCD34D;
+  --white:    #F8FAFC;
+  --gray:     #CBD5E1;
+  --gray2:    #94A3B8;
+  --danger:   #EF4444;
+  --success:  #10B981;
+  --mono:     'JetBrains Mono', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:#F1F5F9;color:#111827;min-height:100vh;overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--navy2);}
+::-webkit-scrollbar-thumb{background:var(--navy3);border-radius:3px;}
+
+/* ═══════════════ LOGIN ═══════════════ */
+#login-page{
+  position:fixed;inset:0;z-index:9000;
+  display:flex;align-items:stretch;
+  font-family:'Inter',sans-serif;
+}
+
+/* ── LEFT PANEL (dark gradient + campus photo) ── */
+.lp-left{
+  flex:1.15;
+  position:relative;
+  display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:flex-end;
+  padding:52px 52px;
+  overflow:hidden;
+}
+.lp-left-photo{
+  position:absolute;inset:0;
+  background-image:url('data:image/jpeg;base64,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');
+  background-size:cover;background-position:center;
+  filter:brightness(0.38) saturate(1.1);
+}
+.lp-left-grad{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    160deg,
+    rgba(92,10,10,0.92) 0%,
+    rgba(139,26,26,0.80) 35%,
+    rgba(179,69,0,0.85) 70%,
+    rgba(196,90,0,0.90) 100%
+  );
+}
+.lp-left-content{
+  position:relative;z-index:2;
+  width:100%;
+}
+
+/* Logo + university name top-left */
+.lp-logo-row{
+  position:absolute;top:40px;left:52px;z-index:2;
+  display:flex;align-items:center;gap:16px;
+}
+.lp-logo-img{
+  width:64px;height:64px;border-radius:50%;
+  background:#fff;padding:4px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.4);
+  flex-shrink:0;
+}
+.lp-logo-img img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+.lp-univ-name{
+  font-size:15px;font-weight:800;color:#fff;
+  line-height:1.3;letter-spacing:.01em;
+  text-shadow:0 2px 8px rgba(0,0,0,0.5);
+}
+.lp-univ-sub{
+  font-size:11px;color:rgba(255,255,255,0.6);
+  font-weight:500;margin-top:2px;letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+/* Bottom text */
+.lp-bottom-heading{
+  font-size:34px;font-weight:900;color:#fff;
+  line-height:1.2;margin-bottom:14px;
+  text-shadow:0 2px 16px rgba(0,0,0,0.5);
+}
+.lp-bottom-sub{
+  font-size:13px;color:rgba(255,255,255,0.65);
+  font-weight:400;margin-bottom:24px;
+  line-height:1.6;
+}
+.lp-read-more{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#7B1010;
+  border:1.5px solid rgba(255,255,255,0.25);
+  border-radius:50px;padding:9px 24px;
+  font-size:13px;font-weight:700;color:#fff;
+  cursor:pointer;transition:background .2s;
+  text-decoration:none;
+}
+.lp-read-more:hover{background:rgba(255,255,255,0.25);}
+
+/* Decorative blobs */
+.lp-blob{
+  position:absolute;border-radius:50%;
+  background:rgba(200,60,0,0.22);
+  pointer-events:none;
+}
+
+/* ── RIGHT PANEL (white clean form) ── */
+.lp-right{
+  width:440px;flex-shrink:0;
+  background:#ffffff;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:56px 52px;
+  position:relative;
+}
+
+/* Hello Again heading */
+.lp-hello{
+  font-size:28px;font-weight:900;
+  color:#111827;
+  margin-bottom:4px;
+  text-align:center;
+}
+.lp-welcome-back{
+  font-size:13px;color:#9CA3AF;
+  text-align:center;margin-bottom:36px;
+}
+
+/* Input rows */
+.lp-field-wrap{
+  position:relative;width:100%;margin-bottom:16px;
+}
+.lp-field-icon{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  color:#9CA3AF;font-size:15px;pointer-events:none;
+}
+.lp-input{
+  width:100%;padding:13px 14px 13px 42px;
+  border:1.5px solid #E5E7EB;border-radius:10px;
+  font-size:14px;color:#111827;background:#F9FAFB;
+  font-family:'Inter',sans-serif;
+  transition:border-color .2s,box-shadow .2s;
+}
+.lp-input:focus{
+  outline:none;border-color:#7B1010;
+  background:#fff;
+  box-shadow:0 0 0 3px rgba(123,16,16,0.1);
+}
+.lp-input::placeholder{color:#9CA3AF;}
+.lp-input.error{border-color:#EF4444;}
+.lp-pw-toggle{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;
+  color:#9CA3AF;font-size:15px;
+  transition:color .2s;
+}
+.lp-pw-toggle:hover{color:#374151;}
+
+/* Forgot password */
+.lp-forgot{
+  text-align:right;width:100%;
+  margin-bottom:22px;margin-top:-8px;
+}
+.lp-forgot a{
+  font-size:12px;color:#7B1010;font-weight:600;
+  cursor:pointer;text-decoration:none;
+}
+.lp-forgot a:hover{text-decoration:underline;}
+
+/* Login button */
+.lp-btn{
+  width:100%;padding:14px;
+  background:#7B1010;
+  border:none;border-radius:50px;
+  color:#fff;font-size:15px;font-weight:700;
+  cursor:pointer;letter-spacing:.02em;
+  transition:background .2s,transform .15s,box-shadow .15s;
+  box-shadow:0 6px 18px rgba(123,16,16,0.35);
+  margin-bottom:14px;
+}
+.lp-btn:hover{background:#8B1414;transform:translateY(-1px);box-shadow:0 10px 24px rgba(123,16,16,0.45);}
+.lp-btn:active{transform:translateY(0);}
+.lp-btn:disabled{opacity:.7;cursor:not-allowed;transform:none;}
+
+/* Forgot / signup links */
+.lp-links{
+  text-align:center;font-size:12px;color:#9CA3AF;
+  margin-top:2px;
+}
+.lp-links a{color:#7B1010;font-weight:600;cursor:pointer;}
+.lp-links a:hover{text-decoration:underline;}
+
+/* Error box */
+.lp-error{
+  width:100%;
+  background:#FEF2F2;border:1px solid #FECACA;
+  border-radius:8px;padding:10px 14px;
+  font-size:12px;color:#DC2626;
+  display:none;margin-bottom:14px;
+  gap:8px;align-items:flex-start;
+}
+.lp-error.show{display:flex;}
+
+/* Demo credentials box */
+.lp-demo{
+  width:100%;
+  background:#EFF6FF;border:1px solid #BFDBFE;
+  border-radius:10px;padding:12px 16px;
+  font-size:12px;color:#1E40AF;
+  margin-top:20px;
+}
+.lp-demo-title{font-weight:700;margin-bottom:8px;font-size:12px;color:#1E3A8A;}
+.lp-demo-row{
+  display:flex;align-items:center;gap:8px;
+  padding:5px 0;border-bottom:1px solid rgba(59,130,246,0.1);
+  font-size:11px;
+}
+.lp-demo-row:last-child{border-bottom:none;padding-bottom:0;}
+.lp-demo-badge{
+  border-radius:4px;padding:2px 7px;
+  font-size:10px;font-weight:700;
+}
+
+/* Animations */
+@keyframes lp-slide-in{
+  from{opacity:0;transform:translateY(24px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.lp-right > *{animation:lp-slide-in .5s ease both;}
+@keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-8px);}40%{transform:translateX(8px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
+.shake{animation:shake .4s ease!important;}
+
+/* Copyright bottom right */
+.lp-copyright{
+  position:absolute;bottom:20px;left:0;right:0;
+  text-align:center;font-size:11px;color:#9CA3AF;
+}
+
+/* Mobile */
+@media(max-width:640px){
+  .lp-left{display:none;}
+  .lp-right{width:100%;padding:40px 28px;}
+}
+
+/* ═══════════════ MAIN APP ═══════════════ */
+#main-app{display:none;min-height:100vh;}
+@keyframes appIn{from{opacity:0;}to{opacity:1;}}
+
+/* SIDEBAR */
+.sidebar{
+  width:240px;height:100vh;position:fixed;left:0;top:0;z-index:200;
+  background:#FFFFFF;
+  border-right:1px solid #E5E7EB;
+  display:flex;flex-direction:column;
+  box-shadow:2px 0 12px rgba(0,0,0,0.08);
+  overflow:hidden;
+}
+.sb-header{padding:0;border-bottom:1px solid #F3F4F6;flex-shrink:0;}
+.sb-brand-bar{
+  background:linear-gradient(135deg,#7B1010,#B34500);
+  padding:16px 18px;display:flex;align-items:center;gap:12px;
+}
+.sb-logo-wrap{width:44px;height:44px;border-radius:50%;background:#fff;padding:3px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+.sb-logo-wrap img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+.sb-brand-text{}
+.sb-name{font-size:13px;font-weight:800;color:#fff;letter-spacing:.03em;line-height:1.2;}
+.sb-sub{font-size:10px;color:rgba(255,255,255,0.65);font-weight:500;margin-top:2px;}
+
+.sb-user{padding:14px 16px;border-bottom:1px solid #F3F4F6;display:flex;align-items:center;gap:10px;background:#FAFAFA;flex-shrink:0;}
+.sb-avatar{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#7B1010 0%,#9B1515 50%,#B34500 100%);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;position:relative;box-shadow:0 2px 6px rgba(123,16,16,0.25);letter-spacing:.02em;}
+.sb-avatar::after{content:'';position:absolute;bottom:-2px;right:-2px;width:11px;height:11px;border-radius:50%;background:var(--success);border:2px solid #FAFAFA;}
+.sb-uname{font-size:13px;font-weight:700;color:#111827;}
+.sb-urole{font-size:10.5px;color:#7B1010;margin-top:2px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:rgba(123,16,16,0.08);padding:1px 7px;border-radius:20px;display:inline-block;}
+
+.sb-nav{flex:1;padding:12px 10px;overflow-y:auto;}
+.sb-section{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9CA3AF;padding:0 8px;margin:14px 0 6px;}
+.sb-section:first-child{margin-top:0;}
+.sb-item{
+  display:flex;align-items:center;gap:10px;padding:10px 10px;border-radius:10px;
+  cursor:pointer;color:#374151;font-size:13px;font-weight:500;
+  transition:all .18s;border:none;background:none;width:100%;text-align:left;margin-bottom:2px;
+}
+.sb-item:hover{background:rgba(123,16,16,0.07);color:#7B1010;}
+.sb-item.active{background:rgba(123,16,16,0.12);color:#7B1010;font-weight:700;border-left:3px solid #7B1010;}
+.sb-item .ic{font-size:15px;width:20px;text-align:center;flex-shrink:0;}
+.sb-item .badge-count{margin-left:auto;background:#7B1010;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;}
+.sb-logout{padding:14px 12px;border-top:1px solid #F3F4F6;background:#FAFAFA;flex-shrink:0;}
+.sb-logout-btn{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;color:#DC2626;font-size:13px;font-weight:600;transition:all .18s;border:1.5px solid #FCA5A5;background:#FFF5F5;width:100%;}
+.sb-logout-btn:hover{background:#FEE2E2;border-color:#F87171;color:#B91C1C;transform:translateX(2px);}
+
+/* TOPBAR */
+.topbar{
+  background:linear-gradient(135deg,#7B1010 0%,#9B2020 50%,#B34500 100%);
+  border-bottom:none;
+  box-shadow:0 2px 12px rgba(123,16,16,0.3);
+  padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+}
+.topbar-left{}
+.topbar-title{font-size:14px;font-weight:600;color:rgba(255,255,255,0.85);}
+.topbar-breadcrumb{font-size:10px;color:rgba(255,255,255,0.55);margin-top:1px;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.topbar-center{position:absolute;left:50%;transform:translateX(-50%);text-align:center;}
+.topbar-univ{font-size:16px;font-weight:900;color:#fff;letter-spacing:.05em;text-transform:uppercase;}
+.topbar-portal{font-size:11px;color:rgba(255,255,255,0.7);margin-top:1px;}
+
+/* CONTENT */
+.main-wrap{margin-left:240px;min-height:100vh;background:#F1F5F9;}
+.content{padding:24px 28px;}
+
+/* CARDS */
+.card{background:#FFFFFF;border:1px solid #E5E7EB;border-radius:14px;transition:border-color .2s,box-shadow .2s;}
+.card:hover{border-color:#D1D5DB;box-shadow:0 4px 16px rgba(0,0,0,0.06);}
+.card-header{background:#FAFAFA;border-bottom:1px solid #F3F4F6;border-radius:14px 14px 0 0;padding:16px 22px;}
+.card-body{padding:20px 22px;}
+
+/* STAT CARDS */
+.stat-card{
+  background:#FFFFFF;
+  border:1px solid #E5E7EB;
+  border-radius:14px;padding:20px 22px;
+  display:flex;align-items:center;gap:16px;
+  transition:transform .2s,box-shadow .2s;
+}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.1);}
+.stat-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.stat-label{font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.05em;}
+.stat-val{font-size:30px;font-weight:800;margin-top:4px;line-height:1;color:#111827;}
+
+/* TABLE */
+.data-table{width:100%;border-collapse:collapse;font-size:13px;}
+.data-table th{background:#F9FAFB;color:#6B7280;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:12px 16px;text-align:left;}
+.data-table th:first-child{border-radius:8px 0 0 8px;}
+.data-table th:last-child{border-radius:0 8px 8px 0;}
+.data-table td{padding:12px 16px;border-bottom:1px solid #F3F4F6;font-size:13px;color:#111827;}
+.data-table tr:hover td{background:#FFF5F5;}
+.data-table tr:last-child td{border-bottom:none;}
+
+/* BADGES */
+.badge{display:inline-block;border-radius:6px;padding:3px 9px;font-size:11px;font-weight:700;}
+.badge-blue{background:rgba(59,130,246,0.15);color:var(--blue3);}
+.badge-green{background:rgba(16,185,129,0.15);color:#34D399;}
+.badge-gold{background:rgba(245,158,11,0.15);color:#FCD34D;}
+.badge-red{background:rgba(239,68,68,0.15);color:#FCA5A5;}
+
+/* FORM INPUTS */
+.field{background:#FFFFFF;border:1.5px solid #D1D5DB;border-radius:9px;color:#111827;font-size:13px;padding:10px 13px;width:100%;transition:border-color .2s,box-shadow .2s;font-family:'Inter',sans-serif;}
+.field:focus{outline:none;border-color:#7B1010;box-shadow:0 0 0 3px rgba(123,16,16,0.1);}
+.field.error{border-color:var(--danger);}
+.field-label{font-size:11px;font-weight:700;color:#374151;letter-spacing:.05em;text-transform:uppercase;margin-bottom:5px;}
+.field-error{font-size:11px;color:var(--danger);margin-top:3px;display:none;}
+.field-error.show{display:block;}
+
+/* BUTTONS */
+.btn{border-radius:9px;font-weight:600;font-size:13px;padding:9px 16px;border:none;cursor:pointer;transition:transform .15s,opacity .15s;display:inline-flex;align-items:center;gap:6px;}
+.btn:hover{transform:translateY(-1px);opacity:.92;}
+.btn-primary{background:#7B1010;color:#fff;box-shadow:0 4px 12px rgba(123,16,16,0.3);}
+.btn-success{background:var(--success);color:#fff;}
+.btn-danger{background:var(--danger);color:#fff;}
+.btn-outline{background:transparent;border:1.5px solid #7B1010;color:#7B1010;}
+.btn-gold{background:var(--gold);color:#1a1a1a;}
+.btn-white{background:#fff;color:var(--navy);font-weight:700;}
+.btn-sm{padding:6px 12px;font-size:12px;border-radius:7px;}
+
+/* PAGES */
+.page{display:none;}
+.page.active{display:block;animation:fadeInPage .3s ease;}
+@keyframes fadeInPage{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
+.modal-bg.open{opacity:1;pointer-events:auto;}
+.modal-box{background:#FFFFFF;border:1px solid #E5E7EB;border-radius:16px;padding:26px;max-width:480px;width:92%;transform:scale(.95);transition:transform .2s;color:#111827;}
+.modal-bg.open .modal-box{transform:scale(1);}
+
+/* TOAST */
+#toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;}
+.toast{background:#FFFFFF;border-left:4px solid #7B1010;border-radius:9px;padding:12px 16px;font-size:13px;color:#111827;box-shadow:0 8px 24px rgba(0,0,0,0.15);animation:toastIn .3s ease;max-width:300px;}
+.toast.success{border-left-color:#059669;}
+.toast.error{border-left-color:var(--danger);}
+@keyframes toastIn{from{transform:translateX(40px);opacity:0;}to{transform:translateX(0);opacity:1;}}
+
+/* COMPLEXITY */
+.cx{font-family:var(--mono);font-size:11px;font-weight:600;background:rgba(245,158,11,0.12);color:#B45309;border:1px solid rgba(245,158,11,0.35);border-radius:5px;padding:2px 7px;display:inline-block;}
+
+/* PROGRESS BAR */
+.prog-bar{background:#FEE2E2;border-radius:99px;height:7px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#7B1010,#B34500);transition:width .6s ease;}
+
+/* CODE BLOCK */
+.code-block{background:rgba(8,14,28,0.9);border:1px solid rgba(59,130,246,0.12);border-radius:9px;padding:14px;font-family:var(--mono);font-size:12px;line-height:1.7;overflow-x:auto;color:#A8B8D8;}
+.kw{color:#7DD3FC;}.fn{color:#86EFAC;}.str{color:#FCA5A5;}.cm{color:#3D4F6A;}.nm{color:#FCD34D;}
+
+/* HIDE MOBILE */
+@media(max-width:640px){.hide-mobile{display:none!important;}}
+
+/* SIDEBAR — MOBILE OFF-CANVAS */
+.sb-hamburger{display:none;}
+.sb-overlay{display:none;}
+@media(max-width:768px){
+  .sidebar{
+    transform:translateX(-100%);
+    transition:transform .25s ease;
+    box-shadow:2px 0 24px rgba(0,0,0,0.25);
+  }
+  .sidebar.open{transform:translateX(0);}
+  .main-wrap{margin-left:0;}
+  .sb-hamburger{
+    display:flex;align-items:center;justify-content:center;
+    width:38px;height:38px;border-radius:9px;flex-shrink:0;
+    background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);
+    color:#fff;cursor:pointer;font-size:18px;
+  }
+  .sb-hamburger:hover{background:rgba(255,255,255,0.25);}
+  .sb-overlay{
+    display:block;position:fixed;inset:0;z-index:190;
+    background:rgba(0,0,0,0.45);opacity:0;pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  .sb-overlay.show{opacity:1;pointer-events:auto;}
+}
+
+/* TOPBAR — MOBILE FIXES */
+@media(max-width:768px){
+  .topbar{padding:10px 14px;height:auto;min-height:56px;flex-wrap:wrap;gap:8px;}
+  .topbar-center{display:none;}
+  .topbar-left{display:flex;align-items:center;gap:12px;}
+  .topbar-title{font-size:13px;}
+  .topbar-breadcrumb{font-size:9px;}
+  .topbar-right{gap:6px;}
+  .topbar-right .btn{padding:7px 10px;}
+  .hide-mobile-label{display:none;}
+}
+@media(max-width:420px){
+  .content{padding:14px;}
+  .topbar{padding:10px;}
+}
+
+/* LOGOUT MODAL */
+.logout-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
+.logout-modal-overlay.show{opacity:1;pointer-events:all;}
+.logout-modal-box{background:#fff;border-radius:20px;padding:32px 28px;max-width:360px;width:92%;text-align:center;transform:scale(.93);transition:transform .2s;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
+.logout-modal-overlay.show .logout-modal-box{transform:scale(1);}
+.logout-icon-wrap{width:64px;height:64px;border-radius:50%;background:#FEE2E2;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+.logout-title{font-size:18px;font-weight:800;color:#111827;margin-bottom:8px;}
+.logout-desc{font-size:13px;color:#6B7280;line-height:1.6;margin-bottom:24px;}
+.logout-user-chip{display:inline-flex;align-items:center;gap:8px;background:#FFF5F5;border:1px solid #FCA5A5;border-radius:50px;padding:6px 16px;font-size:12px;font-weight:600;color:#7B1010;margin-bottom:20px;}
+.logout-actions{display:flex;gap:10px;}
+.logout-cancel{flex:1;padding:11px;border:1.5px solid #E5E7EB;border-radius:10px;background:#fff;color:#374151;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;}
+.logout-cancel:hover{background:#F9FAFB;border-color:#D1D5DB;}
+.logout-confirm{flex:1;padding:11px;border:none;border-radius:10px;background:linear-gradient(135deg,#7B1010,#B34500);color:#fff;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s;box-shadow:0 4px 12px rgba(123,16,16,0.3);}
+.logout-confirm:hover{background:linear-gradient(135deg,#8B1414,#C45200);transform:translateY(-1px);box-shadow:0 6px 18px rgba(123,16,16,0.4);}
+
+/* APP LOADING OVERLAY */
+#app-loading{
+  position:fixed;inset:0;z-index:9500;
+  background:linear-gradient(135deg,#7B1010 0%,#9B2020 50%,#B34500 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  opacity:1;transition:opacity .4s ease;
+}
+#app-loading.hide{opacity:0;pointer-events:none;}
+.al-logo{width:78px;height:78px;border-radius:50%;background:#fff;padding:5px;box-shadow:0 8px 28px rgba(0,0,0,0.25);}
+.al-logo img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+.al-spinner{width:42px;height:42px;border:4px solid rgba(255,255,255,0.25);border-top-color:#fff;border-radius:50%;animation:al-spin .8s linear infinite;}
+@keyframes al-spin{to{transform:rotate(360deg);}}
+.al-text{color:#fff;font-size:14px;font-weight:600;letter-spacing:.05em;}
+.al-sub{color:rgba(255,255,255,0.7);font-size:11px;margin-top:-10px;}
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════ APP LOADING OVERLAY ══════════════════════════════ -->
+<div id="app-loading" style="display:none;">
+  <div class="al-logo">
+    <img src="https://grazia-prod.oss-ap-southeast-1.aliyuncs.com/resources/uid_100084442/45e017b1-1539-44.png" alt="UNPAM"/>
+  </div>
+  <div class="al-spinner"></div>
+  <div class="al-text">Memuat SIMADIK...</div>
+  <div class="al-sub">Mohon tunggu sebentar</div>
+</div>
+
+<!-- ══════════════════════════════ LOGIN PAGE ══════════════════════════════ -->
+<div id="login-page">
+
+  <!-- ═══ LEFT PANEL ═══ -->
+  <div class="lp-left">
+    <div class="lp-left-photo"></div>
+    <div class="lp-left-grad"></div>
+
+    <!-- Decorative blobs -->
+    <div class="lp-blob" style="width:300px;height:300px;top:-80px;right:-60px;"></div>
+    <div class="lp-blob" style="width:200px;height:200px;bottom:120px;right:20px;opacity:.6;"></div>
+
+    <!-- Logo top-left -->
+    <div class="lp-logo-row">
+      <div class="lp-logo-img">
+        <img src="https://grazia-prod.oss-ap-southeast-1.aliyuncs.com/resources/uid_100084442/45e017b1-1539-44.png" alt="UNPAM"/>
+      </div>
+      <div>
+        <div class="lp-univ-name">UNIVERSITAS<br>PAMULANG</div>
+        <div class="lp-univ-sub">UNPAM · SIMADIK</div>
+      </div>
+    </div>
+
+    <!-- Bottom content -->
+    <div class="lp-left-content">
+      <div class="lp-bottom-heading">Login to<br>Dashboard</div>
+      <div class="lp-bottom-sub">
+        Portal Manajemen Data Mahasiswa<br>
+        Universitas Pamulang — Kampus Viktor
+      </div>
+      <a class="lp-read-more">Read More →</a>
+    </div>
+  </div>
+
+  <!-- ═══ RIGHT PANEL ═══ -->
+  <div class="lp-right">
+    <div style="width:100%;max-width:300px;">
+
+      <!-- ═══ LOGIN FORM ═══ -->
+      <div id="login-form-wrap">
+        <div class="lp-hello">Hello Again!</div>
+        <div class="lp-welcome-back">Welcome Back</div>
+
+        <!-- Error -->
+        <div class="lp-error" id="login-error">
+          <span>⚠</span>
+          <span id="login-error-msg">Username atau password salah.</span>
+        </div>
+
+        <!-- Username -->
+        <div class="lp-field-wrap">
+          <span class="lp-field-icon">👤</span>
+          <input id="login-user" class="lp-input" type="text"
+            placeholder="Username"
+            onkeydown="if(event.key==='Enter')doLogin()" />
+        </div>
+
+        <!-- Password -->
+        <div class="lp-field-wrap">
+          <span class="lp-field-icon">🔒</span>
+          <input id="login-pass" class="lp-input" type="password"
+            placeholder="Password"
+            onkeydown="if(event.key==='Enter')doLogin()" />
+          <button class="lp-pw-toggle" onclick="togglePw()" id="pw-toggle">👁</button>
+        </div>
+
+        <!-- Forgot -->
+        <div class="lp-forgot">
+          <a onclick="showForgot()">Forgot Password?</a>
+        </div>
+
+        <!-- Login btn -->
+        <button class="lp-btn" onclick="doLogin()" id="btn-login-submit">
+          <span id="btn-login-text">Login</span>
+        </button>
+
+        <!-- Sign up -->
+        <div class="lp-links">
+          Don't have an account? <a onclick="showSignup()">Sign up here</a>
+        </div>
+      </div>
+
+      <!-- ═══ SIGN UP FORM ═══ -->
+      <div id="signup-form-wrap" style="display:none;">
+        <div class="lp-hello">Create Account</div>
+        <div class="lp-welcome-back">Daftar Akun Baru</div>
+
+        <!-- Error -->
+        <div class="lp-error" id="signup-error">
+          <span>⚠</span>
+          <span id="signup-error-msg">Terjadi kesalahan.</span>
+        </div>
+
+        <!-- Full Name -->
+        <div class="lp-field-wrap">
+          <span class="lp-field-icon">🪪</span>
+          <input id="signup-name" class="lp-input" type="text"
+            placeholder="Nama Lengkap"
+            onkeydown="if(event.key==='Enter')doSignup()" />
+        </div>
+
+        <!-- Username -->
+        <div class="lp-field-wrap">
+          <span class="lp-field-icon">👤</span>
+          <input id="signup-user" class="lp-input" type="text"
+            placeholder="Username"
+            onkeydown="if(event.key==='Enter')doSignup()" />
+        </div>
+
+        <!-- Role -->
+        <div class="lp-field-wrap">
+          <span class="lp-field-icon">🎓</span>
+          <select id="signup-role" class="lp-input" style="appearance:auto;">
+            <option value="Mahasiswa">Mahasiswa</option>
+            <option value="Dosen">Dosen</option>
+          </select>
+        </div>
+
+        <!-- Password -->
+        <div class="lp-field-wrap">
+          <span class="lp-field-icon">🔒</span>
+          <input id="signup-pass" class="lp-input" type="password"
+            placeholder="Password (min. 8 karakter)"
+            onkeydown="if(event.key==='Enter')doSignup()" />
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="lp-field-wrap">
+          <span class="lp-field-icon">🔒</span>
+          <input id="signup-pass2" class="lp-input" type="password"
+            placeholder="Konfirmasi Password"
+            onkeydown="if(event.key==='Enter')doSignup()" />
+        </div>
+
+        <!-- Sign up btn -->
+        <button class="lp-btn" onclick="doSignup()" id="btn-signup-submit" style="margin-top:6px;">
+          <span id="btn-signup-text">Daftar</span>
+        </button>
+
+        <!-- Back to login -->
+        <div class="lp-links">
+          Sudah punya akun? <a onclick="showLogin()">Login di sini</a>
+        </div>
+      </div>
+
+      <!-- ═══ FORGOT PASSWORD FORM ═══ -->
+      <div id="forgot-form-wrap" style="display:none;">
+        <div class="lp-hello">Reset Password</div>
+        <div class="lp-welcome-back">Lupa Kata Sandi</div>
+
+        <!-- Error -->
+        <div class="lp-error" id="forgot-error">
+          <span>⚠</span>
+          <span id="forgot-error-msg">Terjadi kesalahan.</span>
+        </div>
+
+        <!-- STEP 1: Verify username -->
+        <div id="forgot-step1">
+          <p style="font-size:12px;color:#9CA3AF;margin-bottom:16px;line-height:1.5;">Masukkan username akun Anda. Kami akan memverifikasi dan mengizinkan Anda membuat password baru.</p>
+          <div class="lp-field-wrap">
+            <span class="lp-field-icon">👤</span>
+            <input id="forgot-user" class="lp-input" type="text"
+              placeholder="Username"
+              onkeydown="if(event.key==='Enter')verifyForgotUser()" />
+          </div>
+          <button class="lp-btn" onclick="verifyForgotUser()" id="btn-forgot-verify" style="margin-top:6px;">
+            <span id="btn-forgot-verify-text">Lanjutkan</span>
+          </button>
+        </div>
+
+        <!-- STEP 2: Set new password -->
+        <div id="forgot-step2" style="display:none;">
+          <p style="font-size:12px;color:#9CA3AF;margin-bottom:16px;line-height:1.5;">Username <b id="forgot-user-confirm" style="color:#7B1010;"></b> ditemukan. Buat password baru di bawah ini.</p>
+          <div class="lp-field-wrap">
+            <span class="lp-field-icon">🔒</span>
+            <input id="forgot-newpass" class="lp-input" type="password"
+              placeholder="Password Baru (min. 8 karakter)"
+              onkeydown="if(event.key==='Enter')doResetPassword()" />
+          </div>
+          <div class="lp-field-wrap">
+            <span class="lp-field-icon">🔒</span>
+            <input id="forgot-newpass2" class="lp-input" type="password"
+              placeholder="Konfirmasi Password Baru"
+              onkeydown="if(event.key==='Enter')doResetPassword()" />
+          </div>
+          <button class="lp-btn" onclick="doResetPassword()" id="btn-forgot-reset" style="margin-top:6px;">
+            <span id="btn-forgot-reset-text">Reset Password</span>
+          </button>
+        </div>
+
+        <!-- Back to login -->
+        <div class="lp-links">
+          <a onclick="showLogin()">← Kembali ke Login</a>
+        </div>
+      </div>
+
+      <div class="lp-copyright">© 2025 Universitas Pamulang · SIMADIK v1.0</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════ MAIN APP ══════════════════════════════ -->
+<div id="main-app">
+  <div style="display:flex;">
+
+    <!-- SIDEBAR OVERLAY (mobile) -->
+    <div class="sb-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sb-header">
+        <div class="sb-brand-bar">
+          <div class="sb-logo-wrap">
+            <img src="https://grazia-prod.oss-ap-southeast-1.aliyuncs.com/resources/uid_100084442/45e017b1-1539-44.png" alt="UNPAM" />
+          </div>
+          <div class="sb-brand-text">
+            <div class="sb-name">UNPAM</div>
+            <div class="sb-sub">SIMADIK v1.0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sb-user">
+        <div class="sb-avatar" id="sb-avatar">A</div>
+        <div>
+          <div class="sb-uname" id="sb-username">Administrator</div>
+          <div class="sb-urole" id="sb-role">Admin Sistem Akademik</div>
+        </div>
+      </div>
+
+      <div class="sb-nav">
+        <div class="sb-section">Menu Utama</div>
+        <button class="sb-item active" onclick="navTo('dashboard',this)">
+          <span class="ic">📊</span> Dashboard
+        </button>
+        <button class="sb-item" onclick="navTo('data-mahasiswa',this)">
+          <span class="ic">👥</span> Data Mahasiswa
+          <span class="badge-count" id="sb-count">0</span>
+        </button>
+        <button class="sb-item" onclick="navTo('tambah-mahasiswa',this)">
+          <span class="ic">➕</span> Tambah Mahasiswa
+        </button>
+
+        <div class="sb-section">Akademik</div>
+        <button class="sb-item" onclick="navTo('pencarian',this)">
+          <span class="ic">🔍</span> Pencarian Data
+        </button>
+        <button class="sb-item" onclick="navTo('pengurutan',this)">
+          <span class="ic">↕</span> Pengurutan Data
+        </button>
+
+        <div class="sb-section">Informasi</div>
+        <button class="sb-item" onclick="navTo('complexity',this)">
+          <span class="ic">⏱</span> Time Complexity
+        </button>
+        <button class="sb-item" onclick="navTo('guidelines',this)">
+          <span class="ic">📖</span> Guidelines & OOP
+        </button>
+      </div>
+
+      <div class="sb-logout">
+        <button onclick="showLogoutModal()" class="sb-logout-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          <span>Keluar dari Sistem</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-wrap" style="flex:1;">
+      <!-- TOPBAR -->
+      <div class="topbar" style="position:relative;">
+        <div class="topbar-left">
+          <button class="sb-hamburger" onclick="toggleSidebar()" id="sb-hamburger" aria-label="Menu">☰</button>
+          <div>
+            <div class="topbar-title" id="topbar-title">Dashboard</div>
+            <div class="topbar-breadcrumb">SIMADIK / <span id="topbar-sub">Beranda</span></div>
+          </div>
+        </div>
+        <div class="topbar-center">
+          <div class="topbar-univ">UNIVERSITAS PAMULANG</div>
+          <div class="topbar-portal">Portal Manajemen Data Mahasiswa — SIMADIK</div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-sm" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.25);" onclick="exportData()">⬇ <span class="hide-mobile-label">Export</span></button>
+          <button class="btn btn-sm" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.25);" onclick="openEmailModal()">📧 <span class="hide-mobile-label">Kirim Email</span></button>
+          <button class="btn btn-sm" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.25);" onclick="saveToFile()">💾 <span class="hide-mobile-label">Simpan</span></button>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <!-- ████ DASHBOARD ████ -->
+        <div id="page-dashboard" class="page active">
+
+          <!-- Welcome banner -->
+          <div style="background:linear-gradient(135deg,#7B1010 0%,#9B1515 50%,#B34500 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden;">
+            <div style="position:absolute;right:-20px;top:-20px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.06);"></div>
+            <div style="position:absolute;right:60px;bottom:-40px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.04);"></div>
+            <div style="position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+              <div>
+                <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Selamat Datang</div>
+                <div style="font-size:22px;font-weight:800;color:#fff;margin-bottom:4px;">Halo, <span id="welcome-name">Admin</span>! 👋</div>
+                <div style="font-size:13px;color:rgba(255,255,255,0.7);">Portal Manajemen Data Mahasiswa — Universitas Pamulang</div>
+                <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+                  <span style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;">📅 TA 2025/2026</span>
+                  <span style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;">🎓 Semester Gasal</span>
+                  <span style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;">🏫 Kampus Viktor</span>
+                </div>
+              </div>
+              <div style="text-align:right;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:14px;padding:14px 20px;flex-shrink:0;">
+                <div id="welcome-date" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.75);margin-bottom:4px;white-space:nowrap;">—</div>
+                <div id="welcome-time" style="font-size:24px;font-weight:800;color:#fff;font-family:var(--mono);letter-spacing:.05em;">--:--:--</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stat cards -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="stat-card">
+              <div class="stat-icon" style="background:rgba(123,16,16,0.1);">👥</div>
+              <div>
+                <div class="stat-label">Total Mahasiswa</div>
+                <div class="stat-val" id="stat-total" style="color:#7B1010;">0</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="background:rgba(16,185,129,0.2);">📈</div>
+              <div>
+                <div class="stat-label">IPK Rata-rata</div>
+                <div class="stat-val" id="stat-ipk" style="color:#34D399;">—</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="background:rgba(245,158,11,0.2);">📅</div>
+              <div>
+                <div class="stat-label">Angkatan</div>
+                <div class="stat-val" id="stat-year" style="color:var(--gold2);">—</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="background:rgba(168,85,247,0.2);">🎓</div>
+              <div>
+                <div class="stat-label">Program Studi</div>
+                <div class="stat-val" id="stat-prodi" style="color:#E879F9;">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts row -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+            <div class="card">
+              <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                  <div style="font-size:11px;color:#6B7280;font-weight:700;text-transform:uppercase;letter-spacing:.05em;">Distribusi</div>
+                  <div style="font-weight:700;font-size:15px;color:#111827;">Program Studi</div>
+                </div>
+                <span style="font-size:20px;">📊</span>
+              </div>
+              <div class="card-body" id="prodi-chart">
+                <div style="color:#6B7280;font-size:13px;">Belum ada data.</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                  <div style="font-size:11px;color:#6B7280;font-weight:700;text-transform:uppercase;letter-spacing:.05em;">Peringkat</div>
+                  <div style="font-weight:700;font-size:15px;color:#111827;">Top 5 IPK Tertinggi</div>
+                </div>
+                <span style="font-size:20px;">🏆</span>
+              </div>
+              <div class="card-body" id="top-students">
+                <div style="color:#6B7280;font-size:13px;">Belum ada data.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent table -->
+          <div class="card">
+            <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;">
+              <div>
+                <div style="font-size:11px;color:#6B7280;font-weight:700;text-transform:uppercase;letter-spacing:.05em;">Terbaru</div>
+                <div style="font-weight:700;font-size:15px;color:#111827;">Data Mahasiswa Terkini</div>
+              </div>
+              <button class="btn btn-sm" style="background:#7B1010;color:#fff;font-size:12px;padding:6px 14px;border-radius:7px;" onclick="navTo('data-mahasiswa',document.querySelector('.sb-item:nth-child(2)'))">Lihat Semua →</button>
+            </div>
+            <div class="card-body" style="padding:0 0 4px;">
+              <div style="overflow-x:auto;">
+                <table class="data-table">
+                  <thead><tr><th>#</th><th>NIM</th><th>Nama</th><th>Prodi</th><th>IPK</th><th>Status</th></tr></thead>
+                  <tbody id="recent-table-body">
+                    <tr><td colspan="6" style="text-align:center;color:#6B7280;padding:30px;">Belum ada data.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ████ DATA MAHASISWA ████ -->
+        <div id="page-data-mahasiswa" class="page">
+          <div class="card">
+            <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+              <div>
+                <div style="font-size:11px;color:#6B7280;font-weight:700;text-transform:uppercase;letter-spacing:.05em;">Tabel</div>
+                <div style="font-weight:700;font-size:16px;color:#111827;">Daftar Seluruh Mahasiswa</div>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                <input id="quick-search" class="field" style="width:200px;font-size:13px;" placeholder="🔍 Cari mahasiswa..." oninput="renderTable()" />
+                <button class="btn btn-primary btn-sm" onclick="navTo('tambah-mahasiswa',null)">➕ Tambah</button>
+                <button class="btn btn-danger btn-sm" onclick="clearAll()">🗑 Hapus Semua</button>
+              </div>
+            </div>
+            <div class="card-body" style="padding:0 0 8px;">
+              <div style="overflow-x:auto;">
+                <table class="data-table">
+                  <thead>
+                    <tr><th>#</th><th>NIM</th><th>Nama Mahasiswa</th><th class="hide-mobile">Program Studi</th><th class="hide-mobile">Angkatan</th><th>IPK</th><th>Aksi</th></tr>
+                  </thead>
+                  <tbody id="table-body">
+                    <tr><td colspan="7" style="text-align:center;color:#6B7280;padding:40px;">Belum ada data mahasiswa.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ████ TAMBAH MAHASISWA ████ -->
+        <div id="page-tambah-mahasiswa" class="page">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Form -->
+            <div class="lg:col-span-2 card">
+              <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                  <div id="form-mode-label" style="font-size:11px;color:#6B7280;font-weight:700;text-transform:uppercase;letter-spacing:.05em;">Input Data</div>
+                  <div style="font-weight:700;font-size:16px;color:#111827;">Formulir Mahasiswa</div>
+                </div>
+                <span class="cx">O(1)</span>
+              </div>
+              <div class="card-body">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <div class="field-label">NIM *</div>
+                    <input id="f-nim" class="field" placeholder="Cth: 202231001234" maxlength="12"/>
+                    <div id="e-nim" class="field-error">NIM harus 12 digit angka.</div>
+                  </div>
+                  <div>
+                    <div class="field-label">Nama Lengkap *</div>
+                    <input id="f-nama" class="field" placeholder="Nama lengkap mahasiswa"/>
+                    <div id="e-nama" class="field-error">Min 3 huruf, hanya huruf & spasi.</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <div class="field-label">Email *</div>
+                  <input id="f-email" class="field" placeholder="email@domain.com" type="email"/>
+                  <div id="e-email" class="field-error">Format email tidak valid.</div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                  <div class="sm:col-span-2">
+                    <div class="field-label">Program Studi *</div>
+                    <select id="f-prodi" class="field">
+                      <option value="">— Pilih Program Studi —</option>
+                      <option>Teknik Informatika</option>
+                      <option>Sistem Informasi</option>
+                      <option>Ilmu Komputer</option>
+                      <option>Teknik Elektro</option>
+                      <option>Manajemen</option>
+                      <option>Hukum</option>
+                      <option>Akuntansi</option>
+                      <option>Teknik Industri</option>
+                    </select>
+                    <div id="e-prodi" class="field-error">Pilih program studi.</div>
+                  </div>
+                  <div>
+                    <div class="field-label">Angkatan *</div>
+                    <input id="f-angkatan" class="field" placeholder="2022" maxlength="4"/>
+                    <div id="e-angkatan" class="field-error">4 digit (2000–2099).</div>
+                  </div>
+                </div>
+                <div class="mb-6">
+                  <div class="field-label">IPK *</div>
+                  <input id="f-ipk" class="field" placeholder="Contoh: 3.75 (rentang 0.00 – 4.00)"/>
+                  <div id="e-ipk" class="field-error">IPK antara 0.00 sampai 4.00.</div>
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                  <button class="btn btn-primary" style="flex:1;" onclick="submitForm()">
+                    <span id="btn-submit-icon">＋</span> <span id="btn-submit-text">Simpan Data</span>
+                  </button>
+                  <button class="btn btn-outline" onclick="cancelEdit()" id="btn-cancel" style="display:none;">✕ Batal Edit</button>
+                </div>
+              </div>
+            </div>
+            <!-- File I/O panel -->
+            <div>
+              <div class="card mb-4">
+                <div class="card-header">
+                  <div style="font-size:11px;color:#6B7280;font-weight:700;text-transform:uppercase;letter-spacing:.05em;">File I/O</div>
+                  <div style="font-weight:700;font-size:15px;color:#111827;">Import / Export</div>
+                </div>
+                <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
+                  <button class="btn btn-gold" style="width:100%;" onclick="saveToFile()">💾 Simpan ke File JSON</button>
+                  <label class="btn btn-outline" style="width:100%;cursor:pointer;justify-content:center;">
+                    📂 Muat dari File JSON
+                    <input type="file" accept=".json" style="display:none;" onchange="loadFromFile(event)"/>
+                  </label>
+                  <button class="btn btn-success btn-sm" style="width:100%;" onclick="exportData()">📄 Export CSV</button>
+                  <div style="font-size:11px;color:#6B7280;line-height:1.5;">Data tersimpan dalam format JSON. Foto & logo sudah tertanam dalam file.</div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <div style="font-weight:700;font-size:14px;color:#111827;">ℹ Petunjuk</div>
+                </div>
+                <div class="card-body" style="font-size:12px;color:#6B7280;line-height:1.7;">
+                  <div>• NIM: 12 digit angka</div>
+                  <div>• Nama: min 3 karakter</div>
+                  <div>• Email: format valid</div>
+                  <div>• Angkatan: 4 digit tahun</div>
+                  <div>• IPK: rentang 0.00 – 4.00</div>
+                  <div>• IPK ≥ 3.5 = 🏆 Berprestasi</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ████ PENCARIAN ████ -->
+        <div id="page-pencarian" class="page">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="card p-5">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                <div style="font-weight:700;font-size:14px;color:#111827;">🔍 Linear Search</div><span class="cx">O(n)</span>
+              </div>
+              <p style="font-size:12px;color:#6B7280;margin-bottom:12px;">Cari berdasarkan <strong style="color:#fff;">nama</strong> mahasiswa.</p>
+              <input id="s-linear" class="field" style="margin-bottom:10px;" placeholder="Masukkan nama..."/>
+              <button class="btn btn-primary" style="width:100%;" onclick="doLinearSearch()">Cari Sekarang</button>
+            </div>
+            <div class="card p-5">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                <div style="font-weight:700;font-size:14px;color:#111827;">🔎 Sequential Search</div><span class="cx">O(n)</span>
+              </div>
+              <p style="font-size:12px;color:#6B7280;margin-bottom:12px;">Cari berdasarkan <strong style="color:#fff;">NIM</strong> mahasiswa.</p>
+              <input id="s-seq" class="field" style="margin-bottom:10px;" placeholder="Masukkan NIM..."/>
+              <button class="btn btn-primary" style="width:100%;" onclick="doSequentialSearch()">Cari Sekarang</button>
+            </div>
+            <div class="card p-5">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                <div style="font-weight:700;font-size:14px;color:#111827;">⚡ Binary Search</div><span class="cx">O(log n)</span>
+              </div>
+              <p style="font-size:12px;color:#6B7280;margin-bottom:12px;">Cari berdasarkan <strong style="color:#fff;">IPK</strong> (data terurut).</p>
+              <input id="s-binary" class="field" style="margin-bottom:10px;" placeholder="Contoh: 3.50"/>
+              <button class="btn btn-primary" style="width:100%;" onclick="doBinarySearch()">Cari Sekarang</button>
+            </div>
+          </div>
+          <div id="search-results-box" class="card" style="display:none;">
+            <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;">
+              <div style="font-weight:700;color:#111827;">📋 Hasil Pencarian</div>
+              <div id="search-results-info" style="font-size:12px;color:#6B7280;"></div>
+            </div>
+            <div class="card-body" style="padding:0 0 8px;overflow-x:auto;">
+              <table class="data-table">
+                <thead><tr><th>#</th><th>NIM</th><th>Nama</th><th>Prodi</th><th>Angkatan</th><th>IPK</th></tr></thead>
+                <tbody id="search-results-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ████ PENGURUTAN ████ -->
+        <div id="page-pengurutan" class="page">
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-5">
+            <div class="card p-4 text-center" style="cursor:pointer;transition:transform .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''" onclick="doSort('bubble')">
+              <div style="font-size:26px;margin-bottom:8px;">🫧</div>
+              <div style="font-weight:700;font-size:13px;">Bubble Sort</div>
+              <div style="margin:6px 0;"><span class="cx" style="font-size:10px;">O(n²)</span></div>
+              <div style="font-size:11px;color:#6B7280;">By NIM ↑</div>
+            </div>
+            <div class="card p-4 text-center" style="cursor:pointer;transition:transform .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''" onclick="doSort('selection')">
+              <div style="font-size:26px;margin-bottom:8px;">🎯</div>
+              <div style="font-weight:700;font-size:13px;">Selection Sort</div>
+              <div style="margin:6px 0;"><span class="cx" style="font-size:10px;">O(n²)</span></div>
+              <div style="font-size:11px;color:#6B7280;">By Nama ↑</div>
+            </div>
+            <div class="card p-4 text-center" style="cursor:pointer;transition:transform .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''" onclick="doSort('insertion')">
+              <div style="font-size:26px;margin-bottom:8px;">🔽</div>
+              <div style="font-weight:700;font-size:13px;">Insertion Sort</div>
+              <div style="margin:6px 0;"><span class="cx" style="font-size:10px;">O(n²)</span></div>
+              <div style="font-size:11px;color:#6B7280;">By IPK ↑</div>
+            </div>
+            <div class="card p-4 text-center" style="cursor:pointer;transition:transform .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''" onclick="doSort('merge')">
+              <div style="font-size:26px;margin-bottom:8px;">🔀</div>
+              <div style="font-weight:700;font-size:13px;">Merge Sort</div>
+              <div style="margin:6px 0;"><span class="cx" style="font-size:10px;">O(n log n)</span></div>
+              <div style="font-size:11px;color:#6B7280;">By Angkatan ↑</div>
+            </div>
+            <div class="card p-4 text-center" style="cursor:pointer;transition:transform .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''" onclick="doSort('shell')">
+              <div style="font-size:26px;margin-bottom:8px;">🐚</div>
+              <div style="font-weight:700;font-size:13px;">Shell Sort</div>
+              <div style="margin:6px 0;"><span class="cx" style="font-size:10px;">O(n log² n)</span></div>
+              <div style="font-size:11px;color:#6B7280;">By IPK ↓</div>
+            </div>
+          </div>
+          <div id="sort-info" class="card p-4" style="display:none;margin-bottom:14px;border-left:4px solid #7B1010;"></div>
+          <div class="card" style="overflow-x:auto;">
+            <div style="padding:4px 0 8px;">
+              <table class="data-table">
+                <thead><tr><th>#</th><th>NIM</th><th>Nama</th><th>Prodi</th><th>Angkatan</th><th>IPK</th></tr></thead>
+                <tbody id="sort-table-body"><tr><td colspan="6" style="text-align:center;color:#6B7280;padding:30px;">Klik salah satu algoritma di atas.</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ████ COMPLEXITY ████ -->
+        <div id="page-complexity" class="page">
+          <div class="card mb-5">
+            <div class="card-header">
+              <div style="font-size:11px;color:#6B7280;font-weight:700;text-transform:uppercase;letter-spacing:.05em;">Analisis</div>
+              <div style="font-weight:700;font-size:16px;color:#111827;">Time & Space Complexity</div>
+            </div>
+            <div class="card-body" style="overflow-x:auto;padding:0 0 8px;">
+              <table class="data-table">
+                <thead><tr><th>Operasi / Algoritma</th><th>Best Case</th><th>Average Case</th><th>Worst Case</th><th>Space</th></tr></thead>
+                <tbody>
+                  <tr><td style="font-weight:600;">Tambah Mahasiswa</td><td><span class="cx">O(1)</span></td><td><span class="cx">O(1)</span></td><td><span class="cx">O(1)</span></td><td><span class="cx">O(1)</span></td></tr>
+                  <tr><td style="font-weight:600;">Hapus Mahasiswa</td><td><span class="cx">O(n)</span></td><td><span class="cx">O(n)</span></td><td><span class="cx">O(n)</span></td><td><span class="cx">O(1)</span></td></tr>
+                  <tr><td style="font-weight:600;">Linear Search</td><td><span class="cx">O(1)</span></td><td><span class="cx">O(n)</span></td><td><span class="cx">O(n)</span></td><td><span class="cx">O(1)</span></td></tr>
+                  <tr><td style="font-weight:600;">Sequential Search</td><td><span class="cx">O(1)</span></td><td><span class="cx">O(n)</span></td><td><span class="cx">O(n)</span></td><td><span class="cx">O(1)</span></td></tr>
+                  <tr><td style="font-weight:600;">Binary Search</td><td><span class="cx">O(1)</span></td><td><span class="cx">O(log n)</span></td><td><span class="cx">O(log n)</span></td><td><span class="cx">O(1)</span></td></tr>
+                  <tr><td style="font-weight:600;">Bubble Sort</td><td><span class="cx">O(n)</span></td><td><span class="cx">O(n²)</span></td><td><span class="cx">O(n²)</span></td><td><span class="cx">O(1)</span></td></tr>
+                  <tr><td style="font-weight:600;">Selection Sort</td><td><span class="cx">O(n²)</span></td><td><span class="cx">O(n²)</span></td><td><span class="cx">O(n²)</span></td><td><span class="cx">O(1)</span></td></tr>
+                  <tr><td style="font-weight:600;">Insertion Sort</td><td><span class="cx">O(n)</span></td><td><span class="cx">O(n²)</span></td><td><span class="cx">O(n²)</span></td><td><span class="cx">O(1)</span></td></tr>
+                  <tr><td style="font-weight:600;">Merge Sort</td><td><span class="cx">O(n log n)</span></td><td><span class="cx">O(n log n)</span></td><td><span class="cx">O(n log n)</span></td><td><span class="cx">O(n)</span></td></tr>
+                  <tr><td style="font-weight:600;">Shell Sort</td><td><span class="cx">O(n log n)</span></td><td><span class="cx">O(n log² n)</span></td><td><span class="cx">O(n²)</span></td><td><span class="cx">O(1)</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card p-5">
+            <div style="font-weight:700;font-size:15px;margin-bottom:12px;color:#111827;">⚡ Live Benchmark</div>
+            <button class="btn btn-primary btn-sm" style="margin-bottom:14px;" onclick="runBenchmark()">▶ Jalankan Benchmark</button>
+            <div id="benchmark-results" style="font-size:13px;color:#6B7280;">Klik tombol untuk mengukur waktu eksekusi nyata pada data saat ini.</div>
+          </div>
+        </div>
+
+        <!-- ████ GUIDELINES ████ -->
+        <div id="page-guidelines" class="page">
+          <div class="card p-5" style="margin-bottom:16px;background:linear-gradient(135deg,#7B1010 0%,#9B1515 50%,#B34500 100%);color:#fff;">
+            <div style="font-weight:800;font-size:16px;margin-bottom:6px;">📖 Guidelines & Konsep OOP (Object-Oriented Programming)</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.6;">Aplikasi SIMADIK ini dibangun mengikuti 4 pilar utama OOP — <b>Enkapsulasi</b>, <b>Pewarisan (Inheritance)</b>, <b>Polimorfisme</b>, dan <b>Abstraksi</b> — dipadukan dengan konvensi penamaan yang konsisten, validasi input berbasis regex, dan penanganan error melalui try-catch.</div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="card p-5"><div style="font-weight:700;margin-bottom:10px;color:#111827;">🏷 Penamaan Variabel</div><div class="code-block"><span class="cm">// ✅ camelCase untuk variabel & fungsi</span>
+<span class="kw">let</span> <span class="fn">studentList</span> = [];
+<span class="kw">const</span> <span class="fn">MAX_IPK</span> = <span class="nm">4.0</span>;  <span class="cm">// SCREAMING_SNAKE konstan</span>
+<span class="kw">function</span> <span class="fn">validateInput</span>(data) { <span class="cm">...</span> }
+<span class="cm">// ❌ Hindari nama samar</span>
+<span class="kw">let</span> x, a, tmp2;</div></div>
+            <div class="card p-5"><div style="font-weight:700;margin-bottom:10px;color:#111827;">🧱 OOP: Enkapsulasi</div><div class="code-block"><span class="kw">class</span> <span class="fn">Mahasiswa</span> {
+  <span class="cm">// Private fields (#) — tidak bisa diakses langsung dari luar class</span>
+  #nim; #nama; #ipk;
+  <span class="fn">constructor</span>(nim, nama, ipk) {
+    <span class="kw">this</span>.#nim = nim;
+  }
+  <span class="cm">// Getter — akses terkontrol untuk membaca data</span>
+  <span class="fn">get</span> nim() { <span class="kw">return this</span>.#nim; }
+  <span class="cm">// Setter — validasi sebelum mengubah data</span>
+  <span class="kw">set</span> nama(v) { <span class="kw">if</span> (v.trim().length >= <span class="nm">3</span>) <span class="kw">this</span>.#nama = v; }
+}</div></div>
+            <div class="card p-5"><div style="font-weight:700;margin-bottom:10px;color:#111827;">🔗 OOP: Pewarisan (Inheritance)</div><div class="code-block"><span class="kw">class</span> <span class="fn">MahasiswaBerprestasi</span> <span class="kw">extends</span> <span class="fn">Mahasiswa</span> {
+  <span class="cm">// Field tambahan khusus subclass</span>
+  #beasiswa;
+  <span class="fn">constructor</span>(nim, nama, email, prodi, angkatan, ipk, beasiswa) {
+    <span class="cm">// super() memanggil constructor parent class</span>
+    <span class="kw">super</span>(nim, nama, email, prodi, angkatan, ipk);
+    <span class="kw">this</span>.#beasiswa = beasiswa;
+  }
+}</div></div>
+            <div class="card p-5"><div style="font-weight:700;margin-bottom:10px;color:#111827;">🎭 OOP: Polimorfisme</div><div class="code-block"><span class="cm">// Method getInfo() di parent class</span>
+<span class="kw">class</span> <span class="fn">Mahasiswa</span> {
+  <span class="fn">getInfo</span>() {
+    <span class="kw">return</span> <span class="str">`[${this.#nim}] ${this.#nama} — IPK ${this.#ipk.toFixed(2)}`</span>;
+  }
+}
+<span class="cm">// Subclass meng-override method yang sama</span>
+<span class="cm">// dengan perilaku berbeda (polimorfisme)</span>
+<span class="kw">class</span> <span class="fn">MahasiswaBerprestasi</span> <span class="kw">extends</span> <span class="fn">Mahasiswa</span> {
+  <span class="fn">getInfo</span>() {
+    <span class="kw">return super</span>.<span class="fn">getInfo</span>() + <span class="str">` 🏆 (${this.#beasiswa})`</span>;
+  }
+}
+<span class="cm">// Saat dipanggil, objek otomatis menjalankan</span>
+<span class="cm">// versi getInfo() miliknya sendiri</span>
+students.forEach(<span class="fn">s</span> =&gt; console.log(s.getInfo()));</div></div>
+            <div class="card p-5"><div style="font-weight:700;margin-bottom:10px;color:#111827;">🧩 OOP: Abstraksi & Static Method</div><div class="code-block"><span class="kw">class</span> <span class="fn">Mahasiswa</span> {
+  <span class="cm">// Method statis: helper bawaan class itu sendiri,</span>
+  <span class="cm">// tidak butuh instance untuk dipanggil</span>
+  <span class="kw">static</span> <span class="fn">fromJSON</span>(o) {
+    <span class="kw">return new</span> <span class="fn">Mahasiswa</span>(o.nim, o.nama, o.email, o.prodi, o.angkatan, o.ipk);
+  }
+}
+<span class="cm">// Pengguna cukup tahu "apa" yang dilakukan getInfo()/toJSON(),</span>
+<span class="cm">// tanpa perlu tahu detail implementasinya — inilah abstraksi.</span>
+<span class="kw">const</span> data = <span class="fn">Mahasiswa</span>.<span class="fn">fromJSON</span>(jsonObj);</div></div>
+            <div class="card p-5"><div style="font-weight:700;margin-bottom:10px;color:#111827;">🛡 Regex & Try-Catch</div><div class="code-block"><span class="cm">// Regex validasi</span>
+<span class="kw">const</span> NIM_RE = <span class="str">/^\d{12}$/</span>;
+<span class="kw">const</span> IPK_RE = <span class="str">/^([0-3](\.\d{1,2})?|4(\.0{1,2})?)$/</span>;
+<span class="cm">// Try-Catch exception</span>
+<span class="kw">try</span> {
+  <span class="kw">const</span> data = JSON.<span class="fn">parse</span>(raw);
+} <span class="kw">catch</span> (err) {
+  <span class="fn">showToast</span>(err.message, <span class="str">"error"</span>);
+}</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div id="edit-modal" class="modal-bg">
+  <div class="modal-box">
+    <div style="font-weight:800;font-size:18px;margin-bottom:16px;color:#111827;">✏ Edit Data Mahasiswa</div>
+    <div class="grid grid-cols-2 gap-3 mb-3">
+      <div><div class="field-label">NIM</div><input id="m-nim" class="field" readonly style="opacity:.5;"/></div>
+      <div><div class="field-label">IPK</div><input id="m-ipk" class="field"/><div id="me-ipk" class="field-error">IPK 0.00–4.00.</div></div>
+    </div>
+    <div class="mb-3"><div class="field-label">Nama Lengkap</div><input id="m-nama" class="field"/><div id="me-nama" class="field-error">Min 3 huruf.</div></div>
+    <div class="mb-3"><div class="field-label">Email</div><input id="m-email" class="field"/><div id="me-email" class="field-error">Email tidak valid.</div></div>
+    <div class="grid grid-cols-2 gap-3 mb-5">
+      <div><div class="field-label">Prodi</div><select id="m-prodi" class="field"><option value="">— Pilih —</option><option>Teknik Informatika</option><option>Sistem Informasi</option><option>Ilmu Komputer</option><option>Teknik Elektro</option><option>Manajemen</option><option>Hukum</option><option>Akuntansi</option></select></div>
+      <div><div class="field-label">Angkatan</div><input id="m-angkatan" class="field"/><div id="me-angkatan" class="field-error">Format salah.</div></div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-primary" style="flex:1;" onclick="saveEdit()">💾 Simpan Perubahan</button>
+      <button class="btn btn-outline" onclick="closeModal()">Batal</button>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL MODAL -->
+<div id="email-modal" class="modal-bg">
+  <div class="modal-box" style="max-width:500px;max-height:90vh;display:flex;flex-direction:column;padding:0;overflow:hidden;">
+
+    <!-- Fixed Header -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #E5E7EB;flex-shrink:0;">
+      <div>
+        <div style="font-weight:800;font-size:16px;color:#111827;">📧 Kirim Email Notifikasi</div>
+        <div style="font-size:11px;color:#6B7280;margin-top:2px;">Email langsung terkirim ke penerima</div>
+      </div>
+      <button onclick="closeEmailModal()" style="background:none;border:none;cursor:pointer;font-size:18px;color:#9CA3AF;line-height:1;padding:4px;">✕</button>
+    </div>
+
+    <!-- Scrollable Body -->
+    <div style="overflow-y:auto;flex:1;padding:16px 20px;">
+
+      <!-- EmailJS Config Panel (collapsible) -->
+      <div id="emailjs-config-panel" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:8px;margin-bottom:14px;">
+        <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;cursor:pointer;" onclick="toggleEjsPanel()">
+          <span style="font-size:13px;">⚙️</span>
+          <span style="font-weight:700;font-size:12px;color:#92400E;">Konfigurasi EmailJS</span>
+          <span id="ejs-status-badge" style="margin-left:4px;font-size:11px;color:#059669;"></span>
+          <span id="ejs-chevron" style="margin-left:auto;font-size:12px;color:#B45309;">▼</span>
+        </div>
+        <div id="ejs-panel-body" style="display:none;padding:0 12px 12px;">
+          <div id="emailjs-help" style="background:#FFFBEB;border-radius:6px;padding:8px;margin-bottom:10px;font-size:11px;color:#78350F;line-height:1.6;">
+            1. Daftar gratis di <b>emailjs.com</b> → buat <b>Email Service</b> (Gmail) → salin <b>Service ID</b><br>
+            2. Buat <b>Email Template</b> dengan variabel <code style="background:#FEF3C7;padding:1px 3px;border-radius:2px;">{{to_email}}</code> <code style="background:#FEF3C7;padding:1px 3px;border-radius:2px;">{{subject}}</code> <code style="background:#FEF3C7;padding:1px 3px;border-radius:2px;">{{message}}</code> → salin <b>Template ID</b><br>
+            3. Salin <b>Public Key</b> dari Account → API Keys
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+            <div>
+              <div style="font-size:11px;font-weight:600;color:#92400E;margin-bottom:3px;">Service ID *</div>
+              <input id="ejs-service" class="field" style="font-size:12px;padding:6px 10px;" placeholder="service_xxxxxxx"/>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:#92400E;margin-bottom:3px;">Template ID *</div>
+              <input id="ejs-template" class="field" style="font-size:12px;padding:6px 10px;" placeholder="template_xxxxxxx"/>
+            </div>
+          </div>
+          <div style="margin-bottom:8px;">
+            <div style="font-size:11px;font-weight:600;color:#92400E;margin-bottom:3px;">Public Key *</div>
+            <input id="ejs-pubkey" class="field" style="font-size:12px;padding:6px 10px;" placeholder="xxxxxxxxxxxxxxxxxxxx"/>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <button onclick="saveEmailjsConfig()" class="btn btn-primary" style="font-size:11px;padding:6px 14px;">💾 Simpan</button>
+            <span id="ejs-status" style="font-size:11px;color:#6B7280;"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Email Form -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div>
+          <div class="field-label" style="font-size:11px;">Kepada (To) *</div>
+          <input id="em-to" class="field" type="email" style="padding:7px 10px;font-size:13px;" placeholder="penerima@domain.com"/>
+          <div id="eme-to" class="field-error">Email tidak valid.</div>
+        </div>
+        <div>
+          <div class="field-label" style="font-size:11px;">Nama Penerima</div>
+          <input id="em-toname" class="field" style="padding:7px 10px;font-size:13px;" placeholder="Opsional"/>
+        </div>
+      </div>
+      <div style="margin-bottom:10px;">
+        <div class="field-label" style="font-size:11px;">Subjek *</div>
+        <input id="em-subject" class="field" style="padding:7px 10px;font-size:13px;" placeholder="Subjek email"/>
+        <div id="eme-subject" class="field-error">Subjek wajib diisi.</div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div class="field-label" style="font-size:11px;">Pesan *</div>
+        <textarea id="em-body" class="field" rows="4" placeholder="Tulis pesan di sini..." style="resize:vertical;font-family:'Inter',sans-serif;padding:7px 10px;font-size:13px;"></textarea>
+        <div id="eme-body" class="field-error">Pesan wajib diisi.</div>
+      </div>
+
+      <!-- Send Mode -->
+      <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:10px;margin-bottom:4px;">
+        <div style="font-size:11px;font-weight:600;color:#374151;margin-bottom:6px;">Mode Pengiriman:</div>
+        <div style="display:flex;gap:16px;">
+          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:12px;">
+            <input type="radio" name="send-mode" value="emailjs" id="mode-emailjs" checked/>
+            <span>📨 Kirim Langsung <small style="color:#6B7280;">(EmailJS)</small></span>
+          </label>
+          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:12px;">
+            <input type="radio" name="send-mode" value="mailto" id="mode-mailto"/>
+            <span>🖥️ Buka Aplikasi Email</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fixed Footer -->
+    <div style="display:flex;gap:10px;padding:14px 20px;border-top:1px solid #E5E7EB;flex-shrink:0;background:#fff;">
+      <button id="btn-send-email" class="btn btn-primary" style="flex:1;" onclick="sendEmail()">
+        <span id="btn-send-text">📨 Kirim Email</span>
+      </button>
+      <button class="btn btn-outline" onclick="closeEmailModal()">Batal</button>
+    </div>
+  </div>
+</div>
+<div id="del-modal" class="modal-bg">
+  <div class="modal-box" style="max-width:360px;text-align:center;">
+    <div style="font-size:44px;margin-bottom:12px;">🗑</div>
+    <div style="font-weight:800;font-size:18px;margin-bottom:8px;">Hapus Data?</div>
+    <p id="del-desc" style="font-size:13px;color:#6B7280;margin-bottom:22px;"></p>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-danger" style="flex:1;" onclick="confirmDelete()">Ya, Hapus</button>
+      <button class="btn btn-outline" style="flex:1;" onclick="closeDelModal()">Batal</button>
+    </div>
+  </div>
+</div>
+<div id="toast-container"></div>
+
+<script>
+"use strict";
+
+/* ══ OOP: Class Mahasiswa ══ */
+class Mahasiswa {
+  #nim; #nama; #email; #prodi; #angkatan; #ipk; #createdAt;
+  constructor(nim, nama, email, prodi, angkatan, ipk) {
+    this.#nim=nim; this.#nama=nama; this.#email=email;
+    this.#prodi=prodi; this.#angkatan=parseInt(angkatan);
+    this.#ipk=parseFloat(ipk); this.#createdAt=new Date().toISOString();
+  }
+  get nim(){return this.#nim;} get nama(){return this.#nama;} get email(){return this.#email;}
+  get prodi(){return this.#prodi;} get angkatan(){return this.#angkatan;}
+  get ipk(){return this.#ipk;} get createdAt(){return this.#createdAt;}
+  set nama(v){if(v.trim().length>=3)this.#nama=v;}
+  set email(v){if(REGEX.email.test(v))this.#email=v;}
+  set prodi(v){this.#prodi=v;} set angkatan(v){this.#angkatan=parseInt(v);}
+  set ipk(v){this.#ipk=parseFloat(v);}
+  getInfo(){return `[${this.#nim}] ${this.#nama} — IPK ${this.#ipk.toFixed(2)}`;}
+  toJSON(){return{nim:this.#nim,nama:this.#nama,email:this.#email,prodi:this.#prodi,angkatan:this.#angkatan,ipk:this.#ipk,createdAt:this.#createdAt};}
+  static fromJSON(o){return new Mahasiswa(o.nim,o.nama,o.email,o.prodi,o.angkatan,o.ipk);}
+}
+class MahasiswaBerprestasi extends Mahasiswa {
+  #beasiswa;
+  constructor(nim,nama,email,prodi,angkatan,ipk,beasiswa){super(nim,nama,email,prodi,angkatan,ipk);this.#beasiswa=beasiswa;}
+  getInfo(){return super.getInfo()+` 🏆 (${this.#beasiswa})`;}
+}
+
+/* ══ REGEX ══ */
+const REGEX={
+  nim:/^\d{12}$/,
+  nama:/^[a-zA-Z\s.'`\-]{3,}$/,
+  email:/^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  angkatan:/^20\d{2}$/,
+  ipk:/^([0-3](\.[0-9]{1,2})?|4(\.0{1,2})?)$/,
+};
+
+/* ══ STATE ══ */
+let students=[], editIndex=-1, deleteIndex=-1;
+
+/* ══ ACCOUNTS ══ */
+const ACCOUNTS=[
+  {username:'admin',password:'unpam2025',role:'Administrator',roleLabel:'Admin Sistem Akademik',initial:'AD'},
+  {username:'mahasiswa',password:'12345678',role:'Mahasiswa',roleLabel:'Mahasiswa Aktif',initial:'MH'},
+  {username:'dosen',password:'dosen123',role:'Dosen',roleLabel:'Dosen Pembimbing Akademik',initial:'DS'},
+];
+let currentUser=null;
+
+/* ══ LOGIN ══ */
+function doLogin(){
+  try{
+    const u=document.getElementById('login-user').value.trim();
+    const p=document.getElementById('login-pass').value;
+    const btn=document.getElementById('btn-login-submit');
+    const bt=document.getElementById('btn-login-text');
+    if(!u||!p){showLoginError('Username dan password wajib diisi.');shakeForm();return;}
+    bt.textContent='Memverifikasi...'; btn.disabled=true;
+    setTimeout(()=>{
+      try{
+        const match=ACCOUNTS.find(a=>a.username===u&&a.password===p);
+        if(match){currentUser=match;document.getElementById('login-error').classList.remove('show');enterApp();}
+        else{showLoginError('Username atau password tidak sesuai.');shakeForm();document.getElementById('login-pass').value='';}
+      }catch(e){showLoginError('Error: '+e.message);}
+      finally{bt.textContent='Masuk';btn.disabled=false;}
+    },700);
+  }catch(e){showLoginError(e.message);}
+}
+function showLoginError(msg){
+  const el=document.getElementById('login-error');
+  document.getElementById('login-error-msg').textContent=msg;
+  el.classList.add('show');
+}
+function shakeForm(){
+  const r=document.querySelector('.login-right');
+  r.style.animation='none'; void r.offsetWidth;
+  r.style.animation='shake .4s ease';
+}
+
+/* ══ SIGN UP ══ */
+function showSignup(){
+  document.getElementById('login-form-wrap').style.display='none';
+  document.getElementById('forgot-form-wrap').style.display='none';
+  document.getElementById('signup-form-wrap').style.display='block';
+  document.getElementById('signup-error').classList.remove('show');
+}
+function showLogin(){
+  document.getElementById('signup-form-wrap').style.display='none';
+  document.getElementById('forgot-form-wrap').style.display='none';
+  document.getElementById('login-form-wrap').style.display='block';
+  document.getElementById('signup-error').classList.remove('show');
+}
+function showForgot(){
+  document.getElementById('login-form-wrap').style.display='none';
+  document.getElementById('signup-form-wrap').style.display='none';
+  document.getElementById('forgot-form-wrap').style.display='block';
+  document.getElementById('forgot-error').classList.remove('show');
+  document.getElementById('forgot-step1').style.display='block';
+  document.getElementById('forgot-step2').style.display='none';
+  document.getElementById('forgot-user').value='';
+}
+function showForgotError(msg){
+  const el=document.getElementById('forgot-error');
+  document.getElementById('forgot-error-msg').textContent=msg;
+  el.classList.add('show');
+}
+function verifyForgotUser(){
+  try{
+    const u=gv('forgot-user').trim().toLowerCase();
+    const btn=document.getElementById('btn-forgot-verify');
+    const bt=document.getElementById('btn-forgot-verify-text');
+    document.getElementById('forgot-error').classList.remove('show');
+    if(!u){showForgotError('Username wajib diisi.');return;}
+    bt.textContent='Memeriksa...'; btn.disabled=true;
+    setTimeout(()=>{
+      const acc=ACCOUNTS.find(a=>a.username===u);
+      bt.textContent='Lanjutkan'; btn.disabled=false;
+      if(!acc){showForgotError('Username tidak ditemukan.');return;}
+      document.getElementById('forgot-user-confirm').textContent=u;
+      document.getElementById('forgot-step1').style.display='none';
+      document.getElementById('forgot-step2').style.display='block';
+      document.getElementById('forgot-newpass').value='';
+      document.getElementById('forgot-newpass2').value='';
+    },500);
+  }catch(e){showForgotError(e.message);}
+}
+function doResetPassword(){
+  try{
+    const u=gv('forgot-user').trim().toLowerCase();
+    const p=gv('forgot-newpass');
+    const p2=gv('forgot-newpass2');
+    const btn=document.getElementById('btn-forgot-reset');
+    const bt=document.getElementById('btn-forgot-reset-text');
+    document.getElementById('forgot-error').classList.remove('show');
+    if(!p||!p2){showForgotError('Semua kolom wajib diisi.');return;}
+    if(p.length<8){showForgotError('Password minimal 8 karakter.');return;}
+    if(p!==p2){showForgotError('Konfirmasi password tidak sama.');return;}
+    bt.textContent='Menyimpan...'; btn.disabled=true;
+    setTimeout(()=>{
+      const acc=ACCOUNTS.find(a=>a.username===u);
+      bt.textContent='Reset Password'; btn.disabled=false;
+      if(!acc){showForgotError('Akun tidak ditemukan.');return;}
+      acc.password=p;
+      showToast('Password untuk "'+u+'" berhasil diubah. Silakan login.','success');
+      document.getElementById('login-user').value=u;
+      document.getElementById('login-pass').value='';
+      showLogin();
+    },600);
+  }catch(e){showForgotError(e.message);}
+}
+function showSignupError(msg){
+  const el=document.getElementById('signup-error');
+  document.getElementById('signup-error-msg').textContent=msg;
+  el.classList.add('show');
+}
+function doSignup(){
+  try{
+    const nama=gv('signup-name').trim();
+    const u=gv('signup-user').trim().toLowerCase();
+    const role=document.getElementById('signup-role').value;
+    const p=gv('signup-pass');
+    const p2=gv('signup-pass2');
+    const btn=document.getElementById('btn-signup-submit');
+    const bt=document.getElementById('btn-signup-text');
+
+    if(!nama||!u||!p||!p2){showSignupError('Semua kolom wajib diisi.');return;}
+    if(!REGEX.nama.test(nama)){showSignupError('Nama minimal 3 huruf, tanpa karakter aneh.');return;}
+    if(!/^[a-zA-Z0-9_.]{4,20}$/.test(u)){showSignupError('Username 4-20 karakter (huruf, angka, _, .).');return;}
+    if(ACCOUNTS.some(a=>a.username===u)){showSignupError('Username sudah digunakan, pilih yang lain.');return;}
+    if(p.length<8){showSignupError('Password minimal 8 karakter.');return;}
+    if(p!==p2){showSignupError('Konfirmasi password tidak sama.');return;}
+
+    bt.textContent='Mendaftarkan...'; btn.disabled=true;
+    setTimeout(()=>{
+      const initial=nama.trim().split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase();
+      const roleLabel=role==='Dosen'?'Dosen Pembimbing Akademik':'Mahasiswa Aktif';
+      ACCOUNTS.push({username:u,password:p,role:role,roleLabel:roleLabel,initial:initial||role.slice(0,2).toUpperCase(),displayName:nama});
+      showToast('Akun "'+u+'" berhasil dibuat. Silakan login.','success');
+      bt.textContent='Daftar'; btn.disabled=false;
+      document.getElementById('signup-name').value='';
+      document.getElementById('signup-user').value='';
+      document.getElementById('signup-pass').value='';
+      document.getElementById('signup-pass2').value='';
+      document.getElementById('login-user').value=u;
+      document.getElementById('login-pass').value='';
+      showLogin();
+    },700);
+  }catch(e){showSignupError(e.message);}
+}
+function enterApp(){
+  const lp=document.getElementById('login-page');
+  const al=document.getElementById('app-loading');
+  lp.style.transition='opacity .5s ease';lp.style.opacity='0';
+  setTimeout(()=>{
+    lp.style.display='none';
+    al.style.display='flex';
+    al.classList.remove('hide');
+    setTimeout(()=>{
+      const ma=document.getElementById('main-app');
+      ma.style.display='block'; ma.style.animation='appIn .4s ease';
+      renderUserBadge(); updateStats(); renderTable(); renderDashboard(); startClock();
+      al.classList.add('hide');
+      setTimeout(()=>{al.style.display='none';},450);
+    },1000);
+  },500);
+}
+function showLogoutModal(){
+  const m=document.getElementById('logout-modal');
+  const fallback=currentUser?(currentUser.username.charAt(0).toUpperCase()+currentUser.username.slice(1)):'Administrator';
+  const label=currentUser?((currentUser.displayName||fallback)+' ('+currentUser.role+')'):'Administrator';
+  document.getElementById('logout-modal-user').textContent=label;
+  m.classList.add('show');
+}
+function hideLogoutModal(){
+  document.getElementById('logout-modal').classList.remove('show');
+}
+function doLogout(){
+  hideLogoutModal();
+  currentUser=null;
+  if(clockInterval){clearInterval(clockInterval);clockInterval=null;}
+  closeSidebar();
+  document.getElementById('main-app').style.display='none';
+  const lp=document.getElementById('login-page');
+  lp.style.display='flex'; lp.style.opacity='1';
+  document.getElementById('login-user').value='';
+  document.getElementById('login-pass').value='';
+  document.getElementById('login-error').classList.remove('show');
+  showLogin();
+}
+function togglePw(){
+  const i=document.getElementById('login-pass');
+  const b=document.getElementById('pw-toggle');
+  i.type=i.type==='password'?'text':'password';
+  b.textContent=i.type==='password'?'👁':'🙈';
+}
+function renderUserBadge(){
+  if(!currentUser)return;
+  const fallback=currentUser.username.charAt(0).toUpperCase()+currentUser.username.slice(1);
+  const display=currentUser.displayName||fallback;
+  document.getElementById('sb-avatar').textContent=currentUser.initial;
+  document.getElementById('sb-username').textContent=display;
+  document.getElementById('sb-role').textContent=currentUser.roleLabel||currentUser.role;
+  document.getElementById('welcome-name').textContent=display.split(' ')[0];
+}
+
+/* ══ REAL-TIME CLOCK ══ */
+let clockInterval=null;
+function updateClock(){
+  const now=new Date();
+  const days=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const months=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  const dateEl=document.getElementById('welcome-date');
+  const timeEl=document.getElementById('welcome-time');
+  if(dateEl)dateEl.textContent=`${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+  if(timeEl)timeEl.textContent=now.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+function startClock(){
+  updateClock();
+  if(clockInterval)clearInterval(clockInterval);
+  clockInterval=setInterval(updateClock,1000);
+}
+
+/* ══ NAVIGATION ══ */
+const PAGE_META={
+  'dashboard':['Dashboard','Beranda'],
+  'data-mahasiswa':['Data Mahasiswa','Kelola seluruh data mahasiswa'],
+  'tambah-mahasiswa':['Tambah Mahasiswa','Input data mahasiswa baru'],
+  'pencarian':['Pencarian Data','Linear, Sequential & Binary Search'],
+  'pengurutan':['Pengurutan Data','5 Algoritma Sort'],
+  'complexity':['Time Complexity','Estimasi kompleksitas waktu & ruang'],
+  'guidelines':['Guidelines & OOP','Best practices pemrograman'],
+};
+function navTo(page,el){
+  document.querySelectorAll('.sb-item').forEach(n=>n.classList.remove('active'));
+  if(el)el.classList.add('active');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  const[title,sub]=PAGE_META[page]||[page,''];
+  document.getElementById('topbar-title').textContent=title;
+  document.getElementById('topbar-sub').textContent=sub;
+  if(page==='dashboard')renderDashboard();
+  closeSidebar();
+  window.scrollTo(0,0);
+}
+
+/* ══ MOBILE SIDEBAR TOGGLE ══ */
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sb-overlay').classList.toggle('show');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sb-overlay').classList.remove('show');
+}
+
+/* ══ VALIDATION ══ */
+function validateField(val,pat,fid,eid){
+  try{
+    const f=document.getElementById(fid),e=document.getElementById(eid);
+    if(!f||!e)throw new ReferenceError('Element not found: '+fid);
+    const ok=pat.test(val.trim());
+    f.classList.toggle('error',!ok);e.classList.toggle('show',!ok);return ok;
+  }catch(err){console.error(err);return false;}
+}
+function validateForm(){
+  const v1=validateField(gv('f-nim'),REGEX.nim,'f-nim','e-nim');
+  const v2=validateField(gv('f-nama'),REGEX.nama,'f-nama','e-nama');
+  const v3=validateField(gv('f-email'),REGEX.email,'f-email','e-email');
+  const v4=gv('f-prodi')!=='';
+  document.getElementById('e-prodi').classList.toggle('show',!v4);
+  const v5=validateField(gv('f-angkatan'),REGEX.angkatan,'f-angkatan','e-angkatan');
+  const v6=validateField(gv('f-ipk'),REGEX.ipk,'f-ipk','e-ipk');
+  return v1&&v2&&v3&&v4&&v5&&v6;
+}
+function validateModalForm(){
+  const v2=validateField(gv('m-nama'),REGEX.nama,'m-nama','me-nama');
+  const v3=validateField(gv('m-email'),REGEX.email,'m-email','me-email');
+  const v5=validateField(gv('m-angkatan'),REGEX.angkatan,'m-angkatan','me-angkatan');
+  const v6=validateField(gv('m-ipk'),REGEX.ipk,'m-ipk','me-ipk');
+  return v2&&v3&&v5&&v6;
+}
+
+/* ══ CRUD ══ */
+function submitForm(){
+  try{
+    if(!validateForm()){showToast('Periksa kembali isian form.','error');return;}
+    const nim=gv('f-nim').trim();
+    if(students.findIndex(s=>s.nim===nim)!==-1){showToast('NIM '+nim+' sudah terdaftar!','error');return;}
+    const ipk=parseFloat(gv('f-ipk'));
+    const mhs=ipk>=3.5
+      ?new MahasiswaBerprestasi(nim,gv('f-nama').trim(),gv('f-email').trim(),gv('f-prodi'),gv('f-angkatan'),ipk,'Beasiswa Prestasi')
+      :new Mahasiswa(nim,gv('f-nama').trim(),gv('f-email').trim(),gv('f-prodi'),gv('f-angkatan'),ipk);
+    students.push(mhs);
+    showToast(mhs.nama+' berhasil ditambahkan! '+(ipk>=3.5?'🏆':''),'success');
+    resetForm(); renderTable(); updateStats();
+    navTo('data-mahasiswa',document.querySelectorAll('.sb-item')[1]);
+  }catch(err){
+    if(err instanceof TypeError)showToast('Tipe data tidak valid.','error');
+    else showToast(err.message,'error');
+  }
+}
+function editStudent(i){
+  try{
+    if(i<0||i>=students.length)throw new RangeError('Index di luar batas.');
+    const s=students[i]; editIndex=i;
+    document.getElementById('m-nim').value=s.nim;
+    document.getElementById('m-nama').value=s.nama;
+    document.getElementById('m-email').value=s.email;
+    document.getElementById('m-prodi').value=s.prodi;
+    document.getElementById('m-angkatan').value=s.angkatan;
+    document.getElementById('m-ipk').value=s.ipk;
+    document.getElementById('edit-modal').classList.add('open');
+  }catch(err){showToast(err.message,'error');}
+}
+function saveEdit(){
+  try{
+    if(!validateModalForm()){showToast('Data tidak valid.','error');return;}
+    const s=students[editIndex];
+    s.nama=gv('m-nama').trim(); s.email=gv('m-email').trim();
+    s.prodi=gv('m-prodi'); s.angkatan=gv('m-angkatan'); s.ipk=gv('m-ipk');
+    showToast('Data '+s.nama+' diperbarui.','success');
+    closeModal(); renderTable(); updateStats();
+  }catch(err){showToast(err.message,'error');}
+}
+function deleteStudent(i){
+  try{
+    if(i<0||i>=students.length)throw new RangeError('Index tidak valid.');
+    deleteIndex=i;
+    document.getElementById('del-desc').textContent='Hapus data '+students[i].nama+' ('+students[i].nim+')?';
+    document.getElementById('del-modal').classList.add('open');
+  }catch(err){showToast(err.message,'error');}
+}
+function confirmDelete(){
+  try{
+    if(deleteIndex<0)throw new Error('Tidak ada data dipilih.');
+    const n=students[deleteIndex].nama;
+    students.splice(deleteIndex,1);
+    showToast(n+' dihapus.','success');
+    closeDelModal(); renderTable(); updateStats();
+  }catch(err){showToast(err.message,'error');}
+}
+function clearAll(){
+  if(!students.length){showToast('Tidak ada data.','error');return;}
+  if(!confirm('Hapus semua data mahasiswa?'))return;
+  students=[]; renderTable(); updateStats(); showToast('Semua data dihapus.','success');
+}
+
+/* ══ RENDER TABLE ══ */
+function renderTable(){
+  const tbody=document.getElementById('table-body');
+  const kw=gv('quick-search').toLowerCase().trim();
+  const list=kw?students.filter(s=>s.nama.toLowerCase().includes(kw)||s.nim.includes(kw)||s.prodi.toLowerCase().includes(kw)):students;
+  if(!list.length){
+    tbody.innerHTML=`<tr><td colspan="7" style="text-align:center;color:#6B7280;padding:40px;">${kw?'Tidak ada hasil untuk "'+kw+'"':'Belum ada data mahasiswa.'}</td></tr>`;
+    return;
+  }
+  tbody.innerHTML=list.map((s,i)=>{
+    const ri=students.indexOf(s);
+    const ic=s.ipk>=3.5?'badge-gold':s.ipk>=3.0?'badge-green':'badge-blue';
+    return `<tr>
+      <td style="color:#6B7280;font-size:12px;">${i+1}</td>
+      <td style="font-family:monospace;font-size:12px;font-weight:600;color:#374151;">${s.nim}</td>
+      <td><div style="font-weight:600;">${s.nama}${s.ipk>=3.5?' 🏆':''}</div><div style="font-size:11px;color:#6B7280;">${s.email}</div></td>
+      <td class="hide-mobile"><span class="badge badge-blue" style="font-size:10px;">${s.prodi}</span></td>
+      <td class="hide-mobile">${s.angkatan}</td>
+      <td><span class="badge ${ic}">${s.ipk.toFixed(2)}</span></td>
+      <td><div style="display:flex;gap:6px;">
+        <button class="btn btn-outline btn-sm" onclick="editStudent(${ri})">✏</button>
+        <button class="btn btn-success btn-sm" onclick="openEmailModal(${ri})" title="Kirim Email">📧</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteStudent(${ri})">✕</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+/* ══ STATS ══ */
+function updateStats(){
+  const n=students.length;
+  document.getElementById('stat-total').textContent=n;
+  document.getElementById('sb-count').textContent=n;
+  if(!n){['stat-ipk','stat-year','stat-prodi'].forEach(id=>document.getElementById(id).textContent='—');return;}
+  document.getElementById('stat-ipk').textContent=(students.reduce((s,m)=>s+m.ipk,0)/n).toFixed(2);
+  document.getElementById('stat-year').textContent=[...new Set(students.map(m=>m.angkatan))].length;
+  document.getElementById('stat-prodi').textContent=[...new Set(students.map(m=>m.prodi))].length;
+}
+
+/* ══ DASHBOARD ══ */
+function renderDashboard(){
+  // Prodi chart
+  const pm={};
+  students.forEach(s=>{pm[s.prodi]=(pm[s.prodi]||0)+1;});
+  const pc=document.getElementById('prodi-chart');
+  if(!Object.keys(pm).length){pc.innerHTML='<div style="color:#6B7280;font-size:13px;padding:10px 0;">Belum ada data.</div>';return;}
+  const mx=Math.max(...Object.values(pm));
+  pc.innerHTML=Object.entries(pm).sort((a,b)=>b[1]-a[1]).map(([p,c])=>`
+    <div style="margin-bottom:14px;">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+        <span style="font-weight:600;">${p}</span>
+        <span style="color:#7B1010;font-weight:700;">${c} mhs</span>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" style="width:${(c/mx*100).toFixed(0)}%;"></div></div>
+    </div>`).join('');
+  // Top students
+  const te=document.getElementById('top-students');
+  const MEDALS=['🥇','🥈','🥉','4️⃣','5️⃣'];
+  const top5=[...students].sort((a,b)=>b.ipk-a.ipk).slice(0,5);
+  te.innerHTML=top5.map((s,i)=>`
+    <div style="display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #F3F4F6;">
+      <span style="font-size:18px;flex-shrink:0;">${MEDALS[i]}</span>
+      <div style="flex:1;min-width:0;">
+        <div style="font-weight:600;font-size:13px;">${s.nama}</div>
+        <div style="font-size:11px;color:#6B7280;">${s.prodi} · ${s.angkatan}</div>
+      </div>
+      <span class="badge ${s.ipk>=3.5?'badge-gold':s.ipk>=3.0?'badge-green':'badge-blue'}">${s.ipk.toFixed(2)}</span>
+    </div>`).join('');
+  // Recent table
+  const rt=document.getElementById('recent-table-body');
+  const recent=[...students].slice(-5).reverse();
+  if(!recent.length){rt.innerHTML='<tr><td colspan="6" style="text-align:center;color:#6B7280;padding:24px;">Belum ada data.</td></tr>';return;}
+  rt.innerHTML=recent.map((s,i)=>`<tr>
+    <td style="color:#6B7280;font-size:12px;">${i+1}</td>
+    <td style="font-family:monospace;font-size:12px;color:#374151;">${s.nim}</td>
+    <td style="font-weight:600;color:#111827;">${s.nama}</td>
+    <td>${s.prodi}</td>
+    <td><span class="badge ${s.ipk>=3.5?'badge-gold':s.ipk>=3.0?'badge-green':'badge-blue'}">${s.ipk.toFixed(2)}</span></td>
+    <td><span class="badge badge-green" style="font-size:10px;">Aktif</span></td>
+  </tr>`).join('');
+}
+
+/* ══ SEARCH ══ */
+function linearSearch(arr,kw){const r=[],k=kw.toLowerCase();let st=0;for(let i=0;i<arr.length;i++){st++;if(arr[i].nama.toLowerCase().includes(k))r.push({student:arr[i],index:i});}return{results:r,steps:st};}
+function sequentialSearch(arr,nim){let st=0;for(let i=0;i<arr.length;i++){st++;if(arr[i].nim===nim)return{result:arr[i],index:i,steps:st};}return{result:null,index:-1,steps:st};}
+function binarySearch(arr,t){const s=[...arr].sort((a,b)=>a.ipk-b.ipk);let lo=0,hi=s.length-1,r=[],st=0;while(lo<=hi){st++;const m=Math.floor((lo+hi)/2);if(Math.abs(s[m].ipk-t)<0.005){let k=m;while(k>=0&&Math.abs(s[k].ipk-t)<0.005)r.unshift(s[k--]);k=m+1;while(k<s.length&&Math.abs(s[k].ipk-t)<0.005)r.push(s[k++]);break;}else if(s[m].ipk<t)lo=m+1;else hi=m-1;}return{results:r,steps:st};}
+
+function doLinearSearch(){
+  try{const kw=gv('s-linear').trim();if(!kw||!students.length){showToast('Masukkan kata kunci & pastikan ada data.','error');return;}
+  const t0=performance.now();const{results,steps}=linearSearch(students,kw);const ms=(performance.now()-t0).toFixed(3);
+  showSearchResults(results.map(r=>r.student),`Linear Search "${kw}" — ${results.length} ditemukan | ${steps} langkah | ${ms}ms`);}catch(err){showToast(err.message,'error');}
+}
+function doSequentialSearch(){
+  try{const nim=gv('s-seq').trim();if(!nim||!students.length){showToast('Masukkan NIM & pastikan ada data.','error');return;}
+  const t0=performance.now();const{result,steps}=sequentialSearch(students,nim);const ms=(performance.now()-t0).toFixed(3);
+  showSearchResults(result?[result]:[],`Sequential Search NIM "${nim}" — ${result?'ditemukan':'tidak ditemukan'} | ${steps} langkah | ${ms}ms`);}catch(err){showToast(err.message,'error');}
+}
+function doBinarySearch(){
+  try{const ipkStr=gv('s-binary').trim();if(!REGEX.ipk.test(ipkStr)){showToast('Masukkan IPK valid (0.00–4.00).','error');return;}
+  if(!students.length){showToast('Tidak ada data.','error');return;}
+  const t0=performance.now();const{results,steps}=binarySearch(students,parseFloat(ipkStr));const ms=(performance.now()-t0).toFixed(3);
+  showSearchResults(results,`Binary Search IPK "${ipkStr}" — ${results.length} ditemukan | ${steps} langkah | ${ms}ms`);}catch(err){showToast(err.message,'error');}
+}
+function showSearchResults(list,info){
+  const box=document.getElementById('search-results-box');
+  document.getElementById('search-results-info').textContent=info;
+  box.style.display='block';
+  const tb=document.getElementById('search-results-body');
+  if(!list.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:#6B7280;padding:20px;">Tidak ada hasil.</td></tr>';return;}
+  tb.innerHTML=list.map((s,i)=>`<tr>
+    <td style="color:#6B7280;font-size:12px;">${i+1}</td>
+    <td style="font-family:monospace;font-size:12px;color:#374151;">${s.nim}</td>
+    <td style="font-weight:600;color:#111827;">${s.nama}</td>
+    <td>${s.prodi}</td><td>${s.angkatan}</td>
+    <td><span class="badge ${s.ipk>=3.5?'badge-gold':s.ipk>=3.0?'badge-green':'badge-blue'}">${s.ipk.toFixed(2)}</span></td>
+  </tr>`).join('');
+}
+
+/* ══ SORT ══ */
+function bubbleSort(arr){const a=[...arr];for(let i=0;i<a.length-1;i++)for(let j=0;j<a.length-i-1;j++)if(a[j].nim>a[j+1].nim)[a[j],a[j+1]]=[a[j+1],a[j]];return a;}
+function selectionSort(arr){const a=[...arr];for(let i=0;i<a.length-1;i++){let m=i;for(let j=i+1;j<a.length;j++)if(a[j].nama.localeCompare(a[m].nama)<0)m=j;if(m!==i)[a[i],a[m]]=[a[m],a[i]];}return a;}
+function insertionSort(arr){const a=[...arr];for(let i=1;i<a.length;i++){const k=a[i];let j=i-1;while(j>=0&&a[j].ipk>k.ipk){a[j+1]=a[j];j--;}a[j+1]=k;}return a;}
+function mergeSort(arr){if(arr.length<=1)return arr;const m=Math.floor(arr.length/2);return merge(mergeSort(arr.slice(0,m)),mergeSort(arr.slice(m)));}
+function merge(l,r){const res=[];let i=0,j=0;while(i<l.length&&j<r.length)res.push(l[i].angkatan<=r[j].angkatan?l[i++]:r[j++]);return res.concat(l.slice(i)).concat(r.slice(j));}
+function shellSort(arr){const a=[...arr];let g=Math.floor(a.length/2);while(g>0){for(let i=g;i<a.length;i++){const t=a[i];let j=i;while(j>=g&&a[j-g].ipk<t.ipk){a[j]=a[j-g];j-=g;}a[j]=t;}g=Math.floor(g/2);}return a;}
+const SORT_CFG={bubble:{fn:bubbleSort,label:'🫧 Bubble Sort',desc:'Diurutkan by NIM ↑ — O(n²)'},selection:{fn:selectionSort,label:'🎯 Selection Sort',desc:'Diurutkan by Nama ↑ — O(n²)'},insertion:{fn:insertionSort,label:'🔽 Insertion Sort',desc:'Diurutkan by IPK ↑ — O(n²)'},merge:{fn:a=>mergeSort([...a]),label:'🔀 Merge Sort',desc:'Diurutkan by Angkatan ↑ — O(n log n)'},shell:{fn:shellSort,label:'🐚 Shell Sort',desc:'Diurutkan by IPK ↓ — O(n log² n)'}};
+function doSort(type){
+  try{if(!students.length){showToast('Tidak ada data.','error');return;}
+  const cfg=SORT_CFG[type];const t0=performance.now();const s=cfg.fn(students);const ms=(performance.now()-t0).toFixed(3);
+  const ie=document.getElementById('sort-info');ie.style.display='block';
+  ie.innerHTML=`<div style="font-weight:700;">${cfg.label}</div><div style="font-size:12px;color:#6B7280;margin-top:3px;">${cfg.desc} — eksekusi: <strong style="color:var(--gold);">${ms}ms</strong> | ${students.length} data</div>`;
+  const tb=document.getElementById('sort-table-body');
+  tb.innerHTML=s.map((s,i)=>`<tr><td style="color:#6B7280;font-size:12px;">${i+1}</td><td style="font-family:monospace;font-size:12px;color:#374151;">${s.nim}</td><td style="font-weight:600;color:#111827;">${s.nama}</td><td>${s.prodi}</td><td>${s.angkatan}</td><td><span class="badge ${s.ipk>=3.5?'badge-gold':s.ipk>=3.0?'badge-green':'badge-blue'}">${s.ipk.toFixed(2)}</span></td></tr>`).join('');
+  showToast(cfg.label+' selesai ('+ms+'ms)','success');}catch(err){showToast(err.message,'error');}
+}
+
+/* ══ BENCHMARK ══ */
+function runBenchmark(){
+  try{if(!students.length){showToast('Tambahkan data dulu.','error');return;}
+  const ops=[['Bubble Sort',()=>bubbleSort(students)],['Selection Sort',()=>selectionSort(students)],['Insertion Sort',()=>insertionSort(students)],['Merge Sort',()=>mergeSort([...students])],['Shell Sort',()=>shellSort(students)],['Linear Search',()=>linearSearch(students,'a')],['Binary Search',()=>binarySearch(students,3.0)]];
+  const el=document.getElementById('benchmark-results');
+  el.innerHTML=ops.map(([n,fn])=>{const t0=performance.now();for(let i=0;i<100;i++)fn();const ms=((performance.now()-t0)/100).toFixed(4);return`<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;"><span>${n}</span><span style="font-family:var(--mono);color:var(--gold);">${ms}ms <span style="color:#6B7280;font-size:10px;">(avg/100)</span></span></div>`;}).join('');}catch(err){showToast(err.message,'error');}
+}
+
+/* ══ FILE I/O ══ */
+function saveToFile(){
+  try{if(!students.length){showToast('Tidak ada data.','error');return;}
+  const p={meta:{version:'1.0',savedAt:new Date().toISOString(),count:students.length},students:students.map(s=>s.toJSON())};
+  const b=new Blob([JSON.stringify(p,null,2)],{type:'application/json'});
+  const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='simadik_'+Date.now()+'.json';a.click();URL.revokeObjectURL(u);
+  showToast(students.length+' data disimpan ke file JSON.','success');}catch(err){showToast(err.message,'error');}
+}
+function loadFromFile(event){
+  try{const file=event.target.files[0];if(!file)return;
+  if(!file.name.endsWith('.json')){showToast('Hanya file .json.','error');return;}
+  const r=new FileReader();
+  r.onload=e=>{try{const p=JSON.parse(e.target.result);if(!p.students||!Array.isArray(p.students))throw new TypeError('Format file tidak valid.');students=p.students.map(o=>Mahasiswa.fromJSON(o));renderTable();updateStats();renderDashboard();showToast(students.length+' data dimuat.','success');}catch(pe){showToast('Gagal: '+pe.message,'error');}};
+  r.onerror=()=>showToast('Gagal membaca file.','error');r.readAsText(file);}catch(err){showToast(err.message,'error');}
+}
+function exportData(){
+  try{if(!students.length){showToast('Tidak ada data.','error');return;}
+  const rows=students.map(s=>`${s.nim},"${s.nama}","${s.email}","${s.prodi}",${s.angkatan},${s.ipk}`);
+  const b=new Blob([['NIM,Nama,Email,Prodi,Angkatan,IPK',...rows].join('\n')],{type:'text/csv'});
+  const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='simadik_'+Date.now()+'.csv';a.click();URL.revokeObjectURL(u);
+  showToast('Data diekspor CSV.','success');}catch(err){showToast(err.message,'error');}
+}
+
+/* ══ UTILITIES ══ */
+function gv(id){return(document.getElementById(id)?.value||'');}
+function resetForm(){['f-nim','f-nama','f-email','f-prodi','f-angkatan','f-ipk'].forEach(id=>{const e=document.getElementById(id);if(e){e.value='';e.classList.remove('error');}});['e-nim','e-nama','e-email','e-prodi','e-angkatan','e-ipk'].forEach(id=>document.getElementById(id)?.classList.remove('show'));}
+function cancelEdit(){editIndex=-1;resetForm();document.getElementById('btn-cancel').style.display='none';document.getElementById('btn-submit-text').textContent='Simpan Data';document.getElementById('form-mode-label').textContent='Input Data';}
+function closeModal(){document.getElementById('edit-modal').classList.remove('open');editIndex=-1;}
+function closeDelModal(){document.getElementById('del-modal').classList.remove('open');deleteIndex=-1;}
+
+/* ══ EMAIL ══ */
+/* EmailJS config storage */
+let ejsConfig = {service:'', template:'', pubkey:''};
+
+function loadEmailjsConfig(){
+  try{
+    const saved = localStorage.getItem('simadik_ejs');
+    if(saved){ ejsConfig = JSON.parse(saved); }
+  }catch(e){}
+}
+
+function saveEmailjsConfig(){
+  const s = document.getElementById('ejs-service').value.trim();
+  const t = document.getElementById('ejs-template').value.trim();
+  const k = document.getElementById('ejs-pubkey').value.trim();
+  const status = document.getElementById('ejs-status');
+  if(!s||!t||!k){ status.textContent='⚠ Semua field wajib diisi!'; status.style.color='#DC2626'; return; }
+  ejsConfig = {service:s, template:t, pubkey:k};
+  try{
+    localStorage.setItem('simadik_ejs', JSON.stringify(ejsConfig));
+    emailjs.init(k);
+    status.textContent='✅ Tersimpan & siap digunakan!';
+    status.style.color='#059669';
+    showToast('Konfigurasi EmailJS disimpan!','success');
+  }catch(e){ status.textContent='Tersimpan (localStorage).'; status.style.color='#6B7280'; }
+}
+
+function toggleEjsPanel(){
+  const body=document.getElementById('ejs-panel-body');
+  const chev=document.getElementById('ejs-chevron');
+  const open=body.style.display==='none';
+  body.style.display=open?'block':'none';
+  chev.textContent=open?'▲':'▼';
+}
+
+function toggleEmailjsHelp(){
+  const h=document.getElementById('emailjs-help');
+  h.style.display=h.style.display==='none'?'block':'none';
+}
+
+function openEmailModal(idx){
+  try{
+    loadEmailjsConfig();
+    // Reset form
+    ['em-to','em-toname','em-subject','em-body'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+    ['eme-to','eme-subject','eme-body'].forEach(id=>document.getElementById(id)?.classList.remove('show'));
+    ['em-to','em-subject','em-body'].forEach(id=>document.getElementById(id)?.classList.remove('error'));
+
+    // Load saved EmailJS config into panel
+    if(ejsConfig.service) document.getElementById('ejs-service').value = ejsConfig.service;
+    if(ejsConfig.template) document.getElementById('ejs-template').value = ejsConfig.template;
+    if(ejsConfig.pubkey) document.getElementById('ejs-pubkey').value = ejsConfig.pubkey;
+
+    // Update status badge
+    const badge=document.getElementById('ejs-status-badge');
+    const status = document.getElementById('ejs-status');
+    if(ejsConfig.service && ejsConfig.template && ejsConfig.pubkey){
+      badge.textContent='✅ Aktif';
+      if(status){ status.textContent='✅ Konfigurasi aktif'; status.style.color='#059669'; }
+      // Keep panel collapsed if already configured
+      document.getElementById('ejs-panel-body').style.display='none';
+      document.getElementById('ejs-chevron').textContent='▼';
+    } else {
+      badge.textContent='⚠ Belum diatur';
+      // Auto-open panel if not configured
+      document.getElementById('ejs-panel-body').style.display='block';
+      document.getElementById('ejs-chevron').textContent='▲';
+    }
+
+    // Pre-fill from student data
+    if(typeof idx==='number'&&students[idx]){
+      const s=students[idx];
+      document.getElementById('em-to').value=s.email;
+      document.getElementById('em-toname').value=s.nama;
+      document.getElementById('em-subject').value='Informasi Akademik — '+s.nama;
+      document.getElementById('em-body').value=`Yth. ${s.nama} (${s.nim}),\n\nDengan hormat,\n\nKami informasikan bahwa data akademik Anda tercatat sebagai berikut:\n- Program Studi : ${s.prodi}\n- Angkatan     : ${s.angkatan}\n- IPK           : ${s.ipk.toFixed(2)}\n\nMohon segera hubungi bagian akademik jika terdapat kesalahan data.\n\nHormat kami,\nSIMADIK — Universitas Pamulang`;
+    }
+    document.getElementById('email-modal').classList.add('open');
+  }catch(err){showToast(err.message,'error');}
+}
+
+function closeEmailModal(){document.getElementById('email-modal').classList.remove('open');}
+
+async function sendEmail(){
+  try{
+    const to=document.getElementById('em-to').value.trim();
+    const subject=document.getElementById('em-subject').value.trim();
+    const body=document.getElementById('em-body').value.trim();
+    const toname=document.getElementById('em-toname').value.trim();
+    const mode=document.querySelector('input[name="send-mode"]:checked')?.value||'mailto';
+
+    let ok=true;
+    const toEl=document.getElementById('em-to'), toErr=document.getElementById('eme-to');
+    const subEl=document.getElementById('em-subject'), subErr=document.getElementById('eme-subject');
+    const bodyEl=document.getElementById('em-body'), bodyErr=document.getElementById('eme-body');
+    const emailValid=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+    if(!to||!emailValid(to)){toEl.classList.add('error');toErr.classList.add('show');ok=false;}else{toEl.classList.remove('error');toErr.classList.remove('show');}
+    if(!subject){subEl.classList.add('error');subErr.classList.add('show');ok=false;}else{subEl.classList.remove('error');subErr.classList.remove('show');}
+    if(!body){bodyEl.classList.add('error');bodyErr.classList.add('show');ok=false;}else{bodyEl.classList.remove('error');bodyErr.classList.remove('show');}
+    if(!ok)return;
+
+    const btn=document.getElementById('btn-send-email');
+    const btnText=document.getElementById('btn-send-text');
+
+    if(mode==='emailjs'){
+      // Send via EmailJS
+      if(!ejsConfig.service||!ejsConfig.template||!ejsConfig.pubkey){
+        showToast('⚠ Isi dulu konfigurasi EmailJS di panel atas!','error');
+        return;
+      }
+      btnText.textContent='⏳ Mengirim...'; btn.disabled=true;
+      try{
+        emailjs.init(ejsConfig.pubkey);
+        await emailjs.send(ejsConfig.service, ejsConfig.template, {
+          to_email: to,
+          to_name: toname||to,
+          subject: subject,
+          message: body,
+          from_name: 'SIMADIK — Universitas Pamulang',
+          reply_to: 'noreply@unpam.ac.id'
+        });
+        showToast('✅ Email berhasil dikirim ke '+to+'!','success');
+        closeEmailModal();
+      }catch(e){
+        showToast('❌ Gagal kirim: '+(e.text||e.message||'Periksa konfigurasi EmailJS'),'error');
+      }finally{
+        btnText.textContent='📨 Kirim Email'; btn.disabled=false;
+      }
+    } else {
+      // Fallback mailto
+      const params=new URLSearchParams();
+      params.set('subject',subject);
+      params.set('body',body);
+      const link=`mailto:${encodeURIComponent(to)}?${params.toString()}`;
+      window.location.href=link;
+      showToast('Membuka aplikasi email...','success');
+      closeEmailModal();
+    }
+  }catch(err){showToast(err.message,'error');}
+}
+document.getElementById('email-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeEmailModal();});
+
+function showToast(msg,type='info'){
+  try{const c=document.getElementById('toast-container');const t=document.createElement('div');t.className='toast '+type;const ic={success:'✅',error:'❌',info:'ℹ'};t.innerHTML=`${ic[type]||'ℹ'} ${msg}`;c.appendChild(t);setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(40px)';t.style.transition='all .3s';setTimeout(()=>t.remove(),300);},3000);}catch(err){console.error(err);}
+}
+document.getElementById('edit-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+document.getElementById('del-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeDelModal();});
+
+/* ══ SEED DATA ══ */
+(function seed(){
+  const d=[
+    ['202231012345','Andi Pratama','andi@student.unpam.ac.id','Teknik Informatika','2022',3.75],
+    ['202131012346','Budi Santoso','budi@student.unpam.ac.id','Sistem Informasi','2021',3.20],
+    ['202331012347','Citra Dewi','citra@student.unpam.ac.id','Ilmu Komputer','2023',3.90],
+    ['202231012348','Doni Hermawan','doni@student.unpam.ac.id','Teknik Elektro','2022',2.85],
+    ['202031012349','Eka Ramadhani','eka@student.unpam.ac.id','Manajemen','2020',3.55],
+    ['202131012350','Fajar Nugroho','fajar@student.unpam.ac.id','Teknik Informatika','2021',3.10],
+    ['202331012351','Gita Lestari','gita@student.unpam.ac.id','Sistem Informasi','2023',3.80],
+    ['202031012352','Hendra Wijaya','hendra@student.unpam.ac.id','Ilmu Komputer','2020',2.70],
+  ];
+  students=d.map(r=>r[5]>=3.5?new MahasiswaBerprestasi(r[0],r[1],r[2],r[3],r[4],r[5],'Beasiswa Unggul'):new Mahasiswa(r[0],r[1],r[2],r[3],r[4],r[5]));
+  renderTable(); updateStats();
+})();
+</script>
+
+  <!-- LOGOUT CONFIRMATION MODAL -->
+  <div class="logout-modal-overlay" id="logout-modal">
+    <div class="logout-modal-box">
+      <div class="logout-icon-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#DC2626" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+      </div>
+      <div class="logout-title">Keluar dari SIMADIK?</div>
+      <div class="logout-desc">Anda akan keluar dari sesi ini. Semua data yang belum disimpan tetap tersimpan di perangkat Anda.</div>
+      <div class="logout-user-chip">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        <span id="logout-modal-user">Administrator</span>
+      </div>
+      <div class="logout-actions">
+        <button class="logout-cancel" onclick="hideLogoutModal()">Batal</button>
+        <button class="logout-confirm" onclick="doLogout()">Ya, Keluar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
