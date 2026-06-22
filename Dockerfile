@@ -1,5 +1,5 @@
-FROM nginx:alpine
-RUN rm -rf /usr/share/nginx/html/*
-COPY index.html /usr/share/nginx/html/index.html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+FROM python:3.11-alpine
+WORKDIR /app
+COPY index.html /app/index.html
+EXPOSE 8080
+CMD ["python", "-m", "http.server", "8080"]
